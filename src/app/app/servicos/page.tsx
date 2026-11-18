@@ -47,10 +47,10 @@ export default function ServicesPage() {
     <PermissionGuard resource="services">
       <div className="space-y-6">
         <div>
-          <h1 className="font-serif text-3xl font-semibold">
+          <h1 className="font-display text-3xl font-semibold">
             Catálogo de Serviços (Masculino &amp; Feminino)
           </h1>
-          <p className="text-xs text-[#B59E8D]">
+          <p className="text-xs text-[#A5A09A]">
             Configure serviços de barbearia, corte feminino, colorimetria, escova e análise de margem.
           </p>
         </div>
@@ -60,18 +60,18 @@ export default function ServicesPage() {
           className="hud-panel grid items-end gap-3 rounded-2xl p-4 text-xs sm:grid-cols-6"
         >
           <div>
-            <label className="mb-1 block text-[#B59E8D]">Nome do Serviço</label>
+            <label className="mb-1 block text-[#A5A09A]">Nome do Serviço</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Ex: Escova & Hidratação"
-              className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2"
             />
           </div>
           <div>
-            <label className="mb-1 block text-[#B59E8D]">Público</label>
+            <label className="mb-1 block text-[#A5A09A]">Público</label>
             <select
               value={audience}
               onChange={(e) => {
@@ -79,7 +79,7 @@ export default function ServicesPage() {
                 setAudience(v);
                 setCategory(v === 'female' ? 'Salão Feminino' : v === 'male' ? 'Barbearia' : 'Acabamento');
               }}
-              className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2"
             >
               <option value="male">Barbearia Masculina</option>
               <option value="female">Salão / Cabeleireira</option>
@@ -87,27 +87,27 @@ export default function ServicesPage() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-[#B59E8D]">Duração (min)</label>
+            <label className="mb-1 block text-[#A5A09A]">Duração (min)</label>
             <input
               type="number"
               min={5}
               value={durationMinutes}
               onChange={(e) => setDurationMinutes(Number(e.target.value))}
-              className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2"
             />
           </div>
           <div>
-            <label className="mb-1 block text-[#B59E8D]">Intervalo (min)</label>
+            <label className="mb-1 block text-[#A5A09A]">Intervalo (min)</label>
             <input
               type="number"
               min={0}
               value={bufferMinutes}
               onChange={(e) => setBufferMinutes(Number(e.target.value))}
-              className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2"
             />
           </div>
           <div>
-            <label className="mb-1 block text-[#B59E8D]">Preço / Custo (R$)</label>
+            <label className="mb-1 block text-[#A5A09A]">Preço / Custo (R$)</label>
             <div className="grid grid-cols-2 gap-1.5">
               <input
                 type="number"
@@ -115,7 +115,7 @@ export default function ServicesPage() {
                 step="0.01"
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
-                className="rounded-xl border border-white/10 bg-[#0E0906] px-2 py-2"
+                className="rounded-xl border border-[#292521] bg-[#090909] px-2 py-2"
               />
               <input
                 type="number"
@@ -123,13 +123,13 @@ export default function ServicesPage() {
                 step="0.01"
                 value={costEstimate}
                 onChange={(e) => setCostEstimate(Number(e.target.value))}
-                className="rounded-xl border border-white/10 bg-[#0E0906] px-2 py-2"
+                className="rounded-xl border border-[#292521] bg-[#090909] px-2 py-2"
               />
             </div>
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#D49B6A] py-2.5 font-bold text-[#0E0906]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#D99A4E] py-2.5 font-bold text-[#090909]"
           >
             <Plus className="h-4 w-4" />
             <span>Adicionar</span>
@@ -146,10 +146,10 @@ export default function ServicesPage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-semibold uppercase tracking-widest text-[#D49B6A]">
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-[#D99A4E]">
                         {svc.category}
                       </span>
-                      <span className="rounded-full bg-[#0E0906] px-2 py-0.5 text-[9px] uppercase text-[#B59E8D]">
+                      <span className="rounded-full bg-[#090909] px-2 py-0.5 text-[9px] uppercase text-[#A5A09A]">
                         {svc.audience === 'female'
                           ? 'Feminino'
                           : svc.audience === 'male'
@@ -157,38 +157,38 @@ export default function ServicesPage() {
                             : 'Unissex'}
                       </span>
                     </div>
-                    <h3 className="mt-1 flex items-center gap-2 text-base font-bold text-[#F7EFE6]">
-                      <Scissors className="h-4 w-4 text-[#D49B6A]" />
+                    <h3 className="mt-1 flex items-center gap-2 text-base font-bold text-[#F5F1EB]">
+                      <Scissors className="h-4 w-4 text-[#D99A4E]" />
                       {svc.name}
                     </h3>
                   </div>
-                  <span className="text-lg font-bold text-[#D49B6A]">
+                  <span className="text-lg font-bold text-[#D99A4E]">
                     {formatCurrencyBRL(svc.price)}
                   </span>
                 </div>
 
-                <p className="text-xs text-[#B59E8D]">{svc.description}</p>
+                <p className="text-xs text-[#A5A09A]">{svc.description}</p>
 
-                <div className="grid grid-cols-3 gap-2 rounded-xl bg-[#0E0906] p-2.5 text-[11px]">
+                <div className="grid grid-cols-3 gap-2 rounded-xl bg-[#090909] p-2.5 text-[11px]">
                   <div>
-                    <span className="block text-[#B59E8D]">Duração</span>
+                    <span className="block text-[#A5A09A]">Duração</span>
                     <strong>
                       {svc.duration_minutes}m (+{svc.buffer_minutes}m)
                     </strong>
                   </div>
                   <div>
-                    <span className="block text-[#B59E8D]">Margem</span>
-                    <strong className="text-[#45C486]">{prof?.marginPercent ?? 80}%</strong>
+                    <span className="block text-[#A5A09A]">Margem</span>
+                    <strong className="text-[#16C784]">{prof?.marginPercent ?? 80}%</strong>
                   </div>
                   <div>
-                    <span className="block text-[#B59E8D]">Agendados</span>
+                    <span className="block text-[#A5A09A]">Agendados</span>
                     <strong>{prof?.bookingsCount ?? 0}</strong>
                   </div>
                 </div>
 
                 {prof && (
-                  <div className="flex items-start gap-2 text-[11px] text-[#B59E8D]">
-                    <TrendingUp className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D49B6A]" />
+                  <div className="flex items-start gap-2 text-[11px] text-[#A5A09A]">
+                    <TrendingUp className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D99A4E]" />
                     <span>{prof.suggestion}</span>
                   </div>
                 )}

@@ -1,23 +1,40 @@
 ﻿import type { Metadata } from 'next';
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter, Manrope } from 'next/font/google';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-cormorant',
+  variable: '--font-inter',
+  display: 'swap',
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-jakarta',
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-manrope',
+  display: 'swap',
 });
+
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://kortaz-app.vercel.app';
 
 export const metadata: Metadata = {
-  title: 'Kortaz OS — Plataforma Inteligente para Barbearias & Salões de Beleza',
+  metadataBase: new URL(appUrl),
+  title: {
+    default: 'Kortaz — Plataforma SaaS para Barbearias & Salões de Beleza',
+    template: '%s | Kortaz',
+  },
   description:
-    'Sistema completo multi-tenant para barbearias masculinas, cabeleireiros e salões femininos: agenda inteligente, Pix, comissões, CRM, estoque e multiunidades.',
+    'Agende, organize, fidelize e cresça com o Kortaz. Plataforma multi-tenant completa para barbearias masculinas, cabeleireiros e salões de beleza.',
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: appUrl,
+    siteName: 'Kortaz',
+    title: 'Kortaz — Sua barbearia ou salão no próximo nível',
+    description:
+      'Agenda inteligente, gestão de profissionais, comissões automáticas, controle financeiro, estoque, CRM e agendamento online.',
+  },
   icons: {
     icon: '/assets/brand/favicon.svg',
   },
@@ -29,8 +46,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${jakarta.variable}`}>
-      <body className="min-h-screen bg-[#0E0906] text-[#F7EFE6] selection:bg-[#D49B6A]/30 selection:text-[#F7EFE6]">
+    <html lang="pt-BR" className={`${inter.variable} ${manrope.variable}`}>
+      <body className="min-h-screen bg-[#090909] text-[#F5F1EB] antialiased selection:bg-[#D99A4E]/30 selection:text-[#F5F1EB]">
         {children}
       </body>
     </html>

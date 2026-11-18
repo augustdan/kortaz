@@ -133,8 +133,8 @@ export default function FinancialPage() {
       <div className="space-y-6">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h1 className="font-serif text-3xl font-semibold">Financeiro & Fluxo de Caixa</h1>
-            <p className="text-xs text-[#B59E8D]">
+            <h1 className="font-display text-3xl font-semibold">Financeiro & Fluxo de Caixa</h1>
+            <p className="text-xs text-[#A5A09A]">
               Transparência total entre faturamento bruto, taxas de gateway, estornos, comissões e lucro líquido.
             </p>
           </div>
@@ -143,15 +143,15 @@ export default function FinancialPage() {
             <button
               type="button"
               onClick={handleExportCsv}
-              className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-[#18100C] px-4 py-2 text-xs font-semibold hover:border-[#D49B6A]"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#292521] bg-[#151515] px-4 py-2 text-xs font-semibold hover:border-[#D99A4E]"
             >
-              <Download className="h-4 w-4 text-[#D49B6A]" />
+              <Download className="h-4 w-4 text-[#D99A4E]" />
               <span>Exportar CSV</span>
             </button>
             <button
               type="button"
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 rounded-lg bg-[#D49B6A] px-4 py-2 text-xs font-bold text-[#0E0906]"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#D99A4E] px-4 py-2 text-xs font-bold text-[#090909]"
             >
               <Printer className="h-4 w-4" />
               <span>Imprimir / PDF</span>
@@ -162,14 +162,14 @@ export default function FinancialPage() {
         {/* Separação clara de métricas financeiras */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
-            { label: 'Faturamento Bruto', val: summary.grossRevenue, color: 'text-[#F7EFE6]' },
-            { label: 'Taxas Provedor (MP)', val: -summary.providerFees, color: 'text-[#B59E8D]' },
-            { label: 'Estornos', val: -summary.refundsTotal, color: 'text-[#E06258]' },
-            { label: 'Repasses (Comissões)', val: -summary.commissionsTotal, color: 'text-[#D49B6A]' },
-            { label: 'Receita Líquida Estimada', val: summary.netOperatingRevenue, color: 'text-[#45C486]' },
+            { label: 'Faturamento Bruto', val: summary.grossRevenue, color: 'text-[#F5F1EB]' },
+            { label: 'Taxas Provedor (MP)', val: -summary.providerFees, color: 'text-[#A5A09A]' },
+            { label: 'Estornos', val: -summary.refundsTotal, color: 'text-[#EF5350]' },
+            { label: 'Repasses (Comissões)', val: -summary.commissionsTotal, color: 'text-[#D99A4E]' },
+            { label: 'Receita Líquida Estimada', val: summary.netOperatingRevenue, color: 'text-[#16C784]' },
           ].map((card) => (
-            <div key={card.label} className="rounded-xl border border-white/10 bg-[#18100C] p-4">
-              <p className="text-xs text-[#B59E8D]">{card.label}</p>
+            <div key={card.label} className="rounded-xl border border-[#292521] bg-[#151515] p-4">
+              <p className="text-xs text-[#A5A09A]">{card.label}</p>
               <p className={`mt-1.5 text-xl font-bold ${card.color}`}>
                 {formatCurrencyBRL(card.val)}
               </p>
@@ -179,16 +179,16 @@ export default function FinancialPage() {
 
         {/* Caixa Atual & Ações (Abertura, Fechamento, Sangria, Suprimento, Despesa) */}
         <div className="grid gap-6 lg:grid-cols-12">
-          <div className="rounded-xl border border-white/10 bg-[#18100C] p-5 lg:col-span-4 space-y-4">
+          <div className="rounded-xl border border-[#292521] bg-[#151515] p-5 lg:col-span-4 space-y-4">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-sm font-semibold">
-                <Wallet className="h-4 w-4 text-[#D49B6A]" /> Caixa da Unidade
+                <Wallet className="h-4 w-4 text-[#D99A4E]" /> Caixa da Unidade
               </span>
               <span
                 className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${
                   summary.openRegister
-                    ? 'bg-[#45C486]/15 text-[#45C486]'
-                    : 'bg-[#E06258]/15 text-[#E06258]'
+                    ? 'bg-[#16C784]/15 text-[#16C784]'
+                    : 'bg-[#EF5350]/15 text-[#EF5350]'
                 }`}
               >
                 {summary.openRegister ? 'Aberto' : 'Fechado'}
@@ -196,14 +196,14 @@ export default function FinancialPage() {
             </div>
 
             {summary.openRegister && (
-              <div className="rounded-lg bg-[#0E0906] p-3 text-xs space-y-1">
+              <div className="rounded-lg bg-[#090909] p-3 text-xs space-y-1">
                 <div className="flex justify-between">
-                  <span className="text-[#B59E8D]">Saldo inicial</span>
+                  <span className="text-[#A5A09A]">Saldo inicial</span>
                   <span>{formatCurrencyBRL(summary.openRegister.opening_balance)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#B59E8D]">Saldo esperado</span>
-                  <strong className="text-[#D49B6A]">
+                  <span className="text-[#A5A09A]">Saldo esperado</span>
+                  <strong className="text-[#D99A4E]">
                     {formatCurrencyBRL(summary.openRegister.expected_closing_balance)}
                   </strong>
                 </div>
@@ -218,7 +218,7 @@ export default function FinancialPage() {
                     e.target.value as 'bleed' | 'supply' | 'expense' | 'open' | 'close'
                   )
                 }
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               >
                 <option value="supply">Suprimento (Entrada)</option>
                 <option value="bleed">Sangria (Retirada)</option>
@@ -234,7 +234,7 @@ export default function FinancialPage() {
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
                 placeholder="Valor (R$)"
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
               {cashAction === 'expense' && (
                 <input
@@ -242,7 +242,7 @@ export default function FinancialPage() {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   placeholder="Categoria (ex: Aluguel, Energia)"
-                  className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                  className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
                 />
               )}
               <input
@@ -250,45 +250,45 @@ export default function FinancialPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Descrição do lançamento"
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
               <button
                 type="submit"
-                className="w-full rounded-lg bg-[#D49B6A] py-2.5 font-bold text-[#0E0906]"
+                className="w-full rounded-lg bg-[#D99A4E] py-2.5 font-bold text-[#090909]"
               >
                 Registrar Movimentação
               </button>
-              {feedback && <p className="text-[#D49B6A]">{feedback}</p>}
+              {feedback && <p className="text-[#D99A4E]">{feedback}</p>}
             </form>
           </div>
 
           {/* Contas a Pagar e Receber */}
-          <div className="rounded-xl border border-white/10 bg-[#18100C] p-5 lg:col-span-8">
-            <h2 className="text-sm font-semibold text-[#F7EFE6]">Contas a Pagar & Despesas</h2>
+          <div className="rounded-xl border border-[#292521] bg-[#151515] p-5 lg:col-span-8">
+            <h2 className="text-sm font-semibold text-[#F5F1EB]">Contas a Pagar & Despesas</h2>
             <div className="mt-4 space-y-2 text-xs">
               {data.expenses.map((exp) => (
                 <div
                   key={exp.id}
-                  className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-white/5 bg-[#0E0906] p-3"
+                  className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-[#292521]/70 bg-[#090909] p-3"
                 >
                   <div>
-                    <p className="font-semibold text-[#F7EFE6]">{exp.description}</p>
-                    <p className="text-[#B59E8D]">
+                    <p className="font-semibold text-[#F5F1EB]">{exp.description}</p>
+                    <p className="text-[#A5A09A]">
                       {exp.category} &bull; Vencimento: {exp.due_date.split('-').reverse().join('/')}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="font-bold text-[#F7EFE6]">{formatCurrencyBRL(exp.amount)}</span>
+                    <span className="font-bold text-[#F5F1EB]">{formatCurrencyBRL(exp.amount)}</span>
                     {exp.status === 'pending' ? (
                       <button
                         type="button"
                         onClick={() => handlePayExpense(exp.id)}
-                        className="rounded bg-[#45C486] px-2.5 py-1 font-bold text-[#0E0906]"
+                        className="rounded bg-[#16C784] px-2.5 py-1 font-bold text-[#090909]"
                       >
                         Dar Baixa
                       </button>
                     ) : (
-                      <span className="rounded bg-[#45C486]/15 px-2 py-0.5 text-[10px] uppercase text-[#45C486]">
+                      <span className="rounded bg-[#16C784]/15 px-2 py-0.5 text-[10px] uppercase text-[#16C784]">
                         {exp.status}
                       </span>
                     )}
@@ -300,10 +300,10 @@ export default function FinancialPage() {
         </div>
 
         {/* Histórico de Pagamentos e Estornos */}
-        <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#18100C] p-5">
+        <div className="overflow-x-auto rounded-xl border border-[#292521] bg-[#151515] p-5">
           <h2 className="mb-4 text-sm font-semibold">Transações & Pagamentos</h2>
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-white/10 text-[#B59E8D]">
+            <thead className="border-b border-[#292521] text-[#A5A09A]">
               <tr>
                 <th className="py-2 pr-4">Data</th>
                 <th className="py-2 pr-4">Método / Provedor</th>
@@ -317,17 +317,17 @@ export default function FinancialPage() {
             <tbody className="divide-y divide-white/5">
               {summary.payments.map((p) => (
                 <tr key={p.id}>
-                  <td className="py-3 pr-4 text-[#B59E8D]">{formatDateTimeBR(p.created_at)}</td>
+                  <td className="py-3 pr-4 text-[#A5A09A]">{formatDateTimeBR(p.created_at)}</td>
                   <td className="py-3 pr-4">
                     <span className="uppercase">{p.method}</span> ({p.provider})
                   </td>
                   <td className="py-3 pr-4">{formatCurrencyBRL(p.gross_amount)}</td>
-                  <td className="py-3 pr-4 text-[#B59E8D]">{formatCurrencyBRL(p.provider_fee)}</td>
-                  <td className="py-3 pr-4 font-bold text-[#45C486]">
+                  <td className="py-3 pr-4 text-[#A5A09A]">{formatCurrencyBRL(p.provider_fee)}</td>
+                  <td className="py-3 pr-4 font-bold text-[#16C784]">
                     {formatCurrencyBRL(p.net_amount)}
                   </td>
                   <td className="py-3 pr-4">
-                    <span className="rounded bg-[#0E0906] px-2 py-0.5 text-[10px] uppercase text-[#D49B6A]">
+                    <span className="rounded bg-[#090909] px-2 py-0.5 text-[10px] uppercase text-[#D99A4E]">
                       {p.status}
                     </span>
                   </td>
@@ -336,7 +336,7 @@ export default function FinancialPage() {
                       <button
                         type="button"
                         onClick={() => handleRefund(p.id, p.gross_amount - p.refunded_amount)}
-                        className="inline-flex items-center gap-1 rounded border border-[#E06258]/40 px-2.5 py-1 text-[11px] text-[#E06258]"
+                        className="inline-flex items-center gap-1 rounded border border-[#EF5350]/40 px-2.5 py-1 text-[11px] text-[#EF5350]"
                       >
                         <RefreshCcw className="h-3 w-3" /> Estornar
                       </button>

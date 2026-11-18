@@ -107,8 +107,8 @@ export default function CustomersCrmPage() {
     <PermissionGuard resource="customers">
       <div className="space-y-6">
         <div>
-          <h1 className="font-serif text-3xl font-semibold">CRM & Segmentação de Clientes</h1>
-          <p className="text-xs text-[#B59E8D]">
+          <h1 className="font-display text-3xl font-semibold">CRM & Segmentação de Clientes</h1>
+          <p className="text-xs text-[#A5A09A]">
             Histórico completo, segmentação inteligente e recuperação de clientes inativos conforme LGPD.
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function CustomersCrmPage() {
         {/* Cadastro rápido */}
         <form
           onSubmit={handleCreateCustomer}
-          className="grid gap-3 rounded-xl border border-white/10 bg-[#18100C] p-4 sm:grid-cols-6 text-xs"
+          className="grid gap-3 rounded-xl border border-[#292521] bg-[#151515] p-4 sm:grid-cols-6 text-xs"
         >
           <input
             type="text"
@@ -124,7 +124,7 @@ export default function CustomersCrmPage() {
             placeholder="Nome completo"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+            className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
           />
           <input
             type="tel"
@@ -132,32 +132,32 @@ export default function CustomersCrmPage() {
             placeholder="WhatsApp"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+            className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
           />
           <input
             type="email"
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+            className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
           />
           <input
             type="date"
             title="Data de nascimento"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
-            className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+            className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
           />
           <input
             type="text"
             placeholder="Preferências / Observações"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+            className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
           />
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#D49B6A] py-2 font-bold text-[#0E0906]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#D99A4E] py-2 font-bold text-[#090909]"
           >
             <UserPlus className="h-4 w-4" />
             <span>Adicionar</span>
@@ -165,7 +165,7 @@ export default function CustomersCrmPage() {
         </form>
 
         {statusMsg && (
-          <div className="rounded-lg border border-[#D49B6A]/40 bg-[#D49B6A]/10 p-3 text-xs text-[#D49B6A]">
+          <div className="rounded-lg border border-[#D99A4E]/40 bg-[#D99A4E]/10 p-3 text-xs text-[#D99A4E]">
             {statusMsg}
           </div>
         )}
@@ -178,8 +178,8 @@ export default function CustomersCrmPage() {
               onClick={() => setSegmentFilter('all')}
               className={`rounded-full border px-3 py-1 ${
                 segmentFilter === 'all'
-                  ? 'border-[#D49B6A] bg-[#D49B6A] font-bold text-[#0E0906]'
-                  : 'border-white/10 bg-[#18100C] text-[#B59E8D]'
+                  ? 'border-[#D99A4E] bg-[#D99A4E] font-bold text-[#090909]'
+                  : 'border-[#292521] bg-[#151515] text-[#A5A09A]'
               }`}
             >
               Todos
@@ -191,8 +191,8 @@ export default function CustomersCrmPage() {
                 onClick={() => setSegmentFilter(seg)}
                 className={`rounded-full border px-3 py-1 ${
                   segmentFilter === seg
-                    ? 'border-[#D49B6A] bg-[#D49B6A] font-bold text-[#0E0906]'
-                    : 'border-white/10 bg-[#18100C] text-[#B59E8D]'
+                    ? 'border-[#D99A4E] bg-[#D99A4E] font-bold text-[#090909]'
+                    : 'border-[#292521] bg-[#151515] text-[#A5A09A]'
                 }`}
               >
                 {SEGMENT_LABELS[seg]}
@@ -201,13 +201,13 @@ export default function CustomersCrmPage() {
           </div>
 
           <div className="relative w-full sm:w-64">
-            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#B59E8D]" />
+            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#A5A09A]" />
             <input
               type="text"
               placeholder="Buscar nome ou telefone..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-[#18100C] py-2 pl-9 pr-3 text-xs"
+              className="w-full rounded-lg border border-[#292521] bg-[#151515] py-2 pl-9 pr-3 text-xs"
             />
           </div>
         </div>
@@ -219,20 +219,20 @@ export default function CustomersCrmPage() {
             return (
               <div
                 key={customer.id}
-                className="rounded-xl border border-white/10 bg-[#18100C] p-5 space-y-3"
+                className="rounded-xl border border-[#292521] bg-[#151515] p-5 space-y-3"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="text-base font-bold text-[#F7EFE6]">{customer.full_name}</h3>
-                    <p className="text-xs text-[#B59E8D]">
+                    <h3 className="text-base font-bold text-[#F5F1EB]">{customer.full_name}</h3>
+                    <p className="text-xs text-[#A5A09A]">
                       {customer.phone} {customer.email ? `• ${customer.email}` : ''}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-bold text-[#D49B6A]">
+                    <p className="text-sm font-bold text-[#D99A4E]">
                       {formatCurrencyBRL(customer.total_spent)}
                     </p>
-                    <p className="text-[11px] text-[#B59E8D]">
+                    <p className="text-[11px] text-[#A5A09A]">
                       {customer.visits_count} visita(s)
                     </p>
                   </div>
@@ -244,54 +244,54 @@ export default function CustomersCrmPage() {
                       key={s}
                       className={`rounded px-2 py-0.5 text-[10px] font-semibold uppercase ${
                         s === 'high_cancel_risk' || s === 'inactive'
-                          ? 'bg-[#E06258]/15 text-[#E06258]'
-                          : 'bg-[#D49B6A]/15 text-[#D49B6A]'
+                          ? 'bg-[#EF5350]/15 text-[#EF5350]'
+                          : 'bg-[#D99A4E]/15 text-[#D99A4E]'
                       }`}
                     >
                       {SEGMENT_LABELS[s]}
                     </span>
                   ))}
                   {!customer.whatsapp_opt_in && (
-                    <span className="rounded bg-white/10 px-2 py-0.5 text-[10px] text-[#B59E8D]">
+                    <span className="rounded bg-white/10 px-2 py-0.5 text-[10px] text-[#A5A09A]">
                       Opt-out LGPD
                     </span>
                   )}
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 rounded-lg bg-[#0E0906] p-2.5 text-[11px]">
+                <div className="grid grid-cols-3 gap-2 rounded-lg bg-[#090909] p-2.5 text-[11px]">
                   <div>
-                    <span className="block text-[#B59E8D]">Última visita</span>
-                    <strong className="text-[#F7EFE6]">
+                    <span className="block text-[#A5A09A]">Última visita</span>
+                    <strong className="text-[#F5F1EB]">
                       {customer.last_visit_at
                         ? `${formatDateBR(customer.last_visit_at)} (${daysSinceLastVisit}d)`
                         : 'Sem visitas'}
                     </strong>
                   </div>
                   <div>
-                    <span className="block text-[#B59E8D]">Cartão Fidelidade</span>
-                    <strong className="text-[#D49B6A]">
+                    <span className="block text-[#A5A09A]">Cartão Fidelidade</span>
+                    <strong className="text-[#D99A4E]">
                       {loyalty?.stamps_balance ?? 0}/{data.settings.loyalty_cuts_target} selos
                     </strong>
                   </div>
                   <div>
-                    <span className="block text-[#B59E8D]">Cashback</span>
-                    <strong className="text-[#45C486]">
+                    <span className="block text-[#A5A09A]">Cashback</span>
+                    <strong className="text-[#16C784]">
                       {formatCurrencyBRL(loyalty?.cashback_balance ?? 0)}
                     </strong>
                   </div>
                 </div>
 
                 {customer.notes && (
-                  <p className="text-xs italic text-[#B59E8D]">&ldquo;{customer.notes}&rdquo;</p>
+                  <p className="text-xs italic text-[#A5A09A]">&ldquo;{customer.notes}&rdquo;</p>
                 )}
 
                 {recommendedOffer && (
-                  <div className="flex items-center justify-between gap-2 rounded-lg border border-[#D49B6A]/30 bg-[#D49B6A]/10 p-2.5 text-xs">
-                    <span className="text-[#F7EFE6]">{recommendedOffer}</span>
+                  <div className="flex items-center justify-between gap-2 rounded-lg border border-[#D99A4E]/30 bg-[#D99A4E]/10 p-2.5 text-xs">
+                    <span className="text-[#F5F1EB]">{recommendedOffer}</span>
                     <button
                       type="button"
                       onClick={() => handleRecoverInactive(customer.id)}
-                      className="inline-flex shrink-0 items-center gap-1 rounded bg-[#D49B6A] px-2.5 py-1.5 text-[11px] font-bold text-[#0E0906]"
+                      className="inline-flex shrink-0 items-center gap-1 rounded bg-[#D99A4E] px-2.5 py-1.5 text-[11px] font-bold text-[#090909]"
                     >
                       <MessageSquare className="h-3.5 w-3.5" />
                       <span>Recuperar</span>

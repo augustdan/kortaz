@@ -22,8 +22,8 @@ export default function AdminBarbershopsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-serif text-3xl font-semibold">Barbearias Cadastradas (Tenants)</h1>
-        <p className="text-xs text-[#B59E8D]">
+        <h1 className="font-display text-3xl font-semibold">Barbearias Cadastradas (Tenants)</h1>
+        <p className="text-xs text-[#A5A09A]">
           Gerencie contas, planos vinculados e suspenda ou reative acesso sem perder dados.
         </p>
       </div>
@@ -35,16 +35,16 @@ export default function AdminBarbershopsPage() {
           return (
             <div
               key={tenant.id}
-              className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-white/10 bg-[#18100C] p-4 text-xs"
+              className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#292521] bg-[#151515] p-4 text-xs"
             >
               <div>
-                <p className="text-sm font-bold text-[#F7EFE6]">
+                <p className="text-sm font-bold text-[#F5F1EB]">
                   {tenant.name}{' '}
-                  <span className="font-normal text-[#B59E8D]">(/s/{tenant.slug})</span>
+                  <span className="font-normal text-[#A5A09A]">(/s/{tenant.slug})</span>
                 </p>
-                <p className="mt-0.5 text-[#B59E8D]">
-                  {tenant.email} &bull; Plano: <strong className="text-[#D49B6A]">{plan?.name}</strong> &bull; Status:{' '}
-                  <strong className={tenant.status === 'suspended' ? 'text-[#E06258]' : 'text-[#45C486]'}>
+                <p className="mt-0.5 text-[#A5A09A]">
+                  {tenant.email} &bull; Plano: <strong className="text-[#D99A4E]">{plan?.name}</strong> &bull; Status:{' '}
+                  <strong className={tenant.status === 'suspended' ? 'text-[#EF5350]' : 'text-[#16C784]'}>
                     {tenant.status}
                   </strong>
                 </p>
@@ -55,7 +55,7 @@ export default function AdminBarbershopsPage() {
                   <button
                     type="button"
                     onClick={() => toggleTenantStatus(tenant.id, 'active')}
-                    className="rounded-lg bg-[#45C486] px-3 py-1.5 font-bold text-[#0E0906]"
+                    className="rounded-lg bg-[#16C784] px-3 py-1.5 font-bold text-[#090909]"
                   >
                     Reativar Conta
                   </button>
@@ -63,7 +63,7 @@ export default function AdminBarbershopsPage() {
                   <button
                     type="button"
                     onClick={() => toggleTenantStatus(tenant.id, 'suspended')}
-                    className="rounded-lg border border-[#E06258]/40 px-3 py-1.5 font-semibold text-[#E06258]"
+                    className="rounded-lg border border-[#EF5350]/40 px-3 py-1.5 font-semibold text-[#EF5350]"
                   >
                     Suspender Conta
                   </button>

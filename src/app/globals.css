@@ -1,77 +1,103 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0E0906;
-  --color-surface: #18100C;
-  --color-surface-elevated: #241710;
-  --color-gold: #D49B6A;
-  --color-gold-hover: #E5B386;
+  --color-background: #090909;
+  --color-background-secondary: #111111;
+  --color-sidebar: #0C0C0C;
+  --color-surface: #151515;
+  --color-surface-elevated: #1B1B1B;
+  --color-border-subtle: #292521;
+  --color-gold: #D99A4E;
+  --color-gold-hover: #F2B968;
   --color-copper: #A86B3E;
-  --color-foreground: #F7EFE6;
-  --color-muted: #B59E8D;
-  --color-success: #45C486;
-  --color-danger: #E06258;
+  --color-foreground: #F5F1EB;
+  --color-muted: #A5A09A;
+  --color-success: #16C784;
+  --color-danger: #EF5350;
+  --color-info: #4299E1;
+  --color-purple: #A66BEB;
 
-  --font-serif: var(--font-cormorant), Georgia, serif;
-  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 :root {
   color-scheme: dark;
-  --bg: #0E0906;
-  --surface: #18100C;
-  --surface-2: #241710;
-  --gold: #D49B6A;
-  --gold-hover: #E5B386;
-  --text-main: #F7EFE6;
-  --text-muted: #B59E8D;
-  --success: #45C486;
-  --error: #E06258;
+  --bg: #090909;
+  --bg-secondary: #111111;
+  --sidebar: #0C0C0C;
+  --surface: #151515;
+  --surface-2: #1B1B1B;
+  --border: #292521;
+  --gold: #D99A4E;
+  --gold-hover: #F2B968;
+  --text-main: #F5F1EB;
+  --text-muted: #A5A09A;
+  --success: #16C784;
+  --error: #EF5350;
+  --info: #4299E1;
+  --purple: #A66BEB;
 }
 
 body {
-  background-color: #0E0906;
-  color: #F7EFE6;
-  font-family: var(--font-jakarta), system-ui, sans-serif;
+  background-color: #090909;
+  color: #F5F1EB;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Efeitos HUD Espresso & Bronze */
+h1, h2, h3, h4, .font-display, .font-serif {
+  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+}
+
+/* Superfícies Kortaz 2.0 — Espresso Brown & Bronze HUD */
+.kortaz-card {
+  background-color: #151515;
+  border: 1px solid #292521;
+  box-shadow: 0 12px 32px -18px rgba(0, 0, 0, 0.75);
+}
+
+.kortaz-card-elevated {
+  background-color: #1B1B1B;
+  border: 1px solid rgba(217, 154, 78, 0.24);
+  box-shadow: inset 0 1px 0 rgba(245, 241, 235, 0.05), 0 18px 40px -20px rgba(0, 0, 0, 0.85);
+}
+
 .hud-panel {
-  background: linear-gradient(155deg, rgba(36, 23, 16, 0.72) 0%, rgba(16, 10, 7, 0.88) 100%);
-  border: 1px solid rgba(212, 155, 106, 0.18);
-  box-shadow: inset 0 1px 0 rgba(247, 239, 230, 0.08), 0 24px 60px -24px rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(18px);
+  background: linear-gradient(160deg, rgba(27, 27, 27, 0.92) 0%, rgba(17, 17, 17, 0.96) 100%);
+  border: 1px solid #292521;
+  box-shadow: inset 0 1px 0 rgba(245, 241, 235, 0.05), 0 20px 48px -24px rgba(0, 0, 0, 0.85);
 }
 
 .hud-pill {
-  background: linear-gradient(135deg, rgba(46, 30, 21, 0.78) 0%, rgba(22, 14, 9, 0.85) 100%);
-  border: 1px solid rgba(212, 155, 106, 0.28);
-  box-shadow: inset 0 1px 0 rgba(247, 239, 230, 0.14);
-  backdrop-filter: blur(14px);
+  background: rgba(21, 21, 21, 0.9);
+  border: 1px solid #292521;
+  box-shadow: inset 0 1px 0 rgba(245, 241, 235, 0.06);
 }
 
 .hud-radial-glow {
-  background: radial-gradient(circle at 50% 35%, rgba(168, 107, 62, 0.24) 0%, rgba(62, 35, 19, 0.14) 38%, rgba(14, 9, 6, 0) 72%);
+  background: radial-gradient(circle at 60% 20%, rgba(217, 154, 78, 0.14) 0%, rgba(168, 107, 62, 0.06) 36%, rgba(9, 9, 9, 0) 70%);
 }
 
-/* Scrollbars discretas no tema espresso */
+/* Scrollbars discretas */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0E0906;
+  background: #090909;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3A2519;
+  background: #292521;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D49B6A;
+  background: #D99A4E;
 }
 
 @media print {

@@ -85,8 +85,8 @@ export default function CommissionsPage() {
       <div className="space-y-6">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h1 className="font-serif text-3xl font-semibold">Sistema de Comissões</h1>
-            <p className="text-xs text-[#B59E8D]">
+            <h1 className="font-display text-3xl font-semibold">Sistema de Comissões</h1>
+            <p className="text-xs text-[#A5A09A]">
               Regras por porcentagem, valor fixo, serviço específico ou meta com histórico imutável.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function CommissionsPage() {
             <select
               value={selectedBarberId}
               onChange={(e) => setSelectedBarberId(e.target.value)}
-              className="rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs"
+              className="rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs"
             >
               <option value="all">Todos os profissionais</option>
               {data.barbers.map((b) => (
@@ -109,7 +109,7 @@ export default function CommissionsPage() {
               <button
                 type="button"
                 onClick={handleSettleCommissions}
-                className="inline-flex items-center gap-2 rounded-lg bg-[#45C486] px-4 py-2 text-xs font-bold text-[#0E0906]"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#16C784] px-4 py-2 text-xs font-bold text-[#090909]"
               >
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Fechar & Pagar ({formatCurrencyBRL(totalPending)})</span>
@@ -119,21 +119,21 @@ export default function CommissionsPage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-white/10 bg-[#18100C] p-4">
-            <p className="text-xs text-[#B59E8D]">Comissões Pendentes</p>
-            <p className="mt-1 text-2xl font-bold text-[#D49B6A]">
+          <div className="rounded-xl border border-[#292521] bg-[#151515] p-4">
+            <p className="text-xs text-[#A5A09A]">Comissões Pendentes</p>
+            <p className="mt-1 text-2xl font-bold text-[#D99A4E]">
               {formatCurrencyBRL(totalPending)}
             </p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-[#18100C] p-4">
-            <p className="text-xs text-[#B59E8D]">Comissões Pagas</p>
-            <p className="mt-1 text-2xl font-bold text-[#45C486]">
+          <div className="rounded-xl border border-[#292521] bg-[#151515] p-4">
+            <p className="text-xs text-[#A5A09A]">Comissões Pagas</p>
+            <p className="mt-1 text-2xl font-bold text-[#16C784]">
               {formatCurrencyBRL(totalPaid)}
             </p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-[#18100C] p-4">
-            <p className="text-xs text-[#B59E8D]">Regras Ativas</p>
-            <p className="mt-1 text-2xl font-bold text-[#F7EFE6]">
+          <div className="rounded-xl border border-[#292521] bg-[#151515] p-4">
+            <p className="text-xs text-[#A5A09A]">Regras Ativas</p>
+            <p className="mt-1 text-2xl font-bold text-[#F5F1EB]">
               {data.commissionRules.length}
             </p>
           </div>
@@ -142,16 +142,16 @@ export default function CommissionsPage() {
         {can('commissions', 'can_edit') && (
           <form
             onSubmit={handleCreateRule}
-            className="grid gap-3 rounded-xl border border-white/10 bg-[#18100C] p-4 sm:grid-cols-6 text-xs items-end"
+            className="grid gap-3 rounded-xl border border-[#292521] bg-[#151515] p-4 sm:grid-cols-6 text-xs items-end"
           >
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Escopo da Regra</label>
+              <label className="mb-1 block text-[#A5A09A]">Escopo da Regra</label>
               <select
                 value={ruleScope}
                 onChange={(e) =>
                   setRuleScope(e.target.value as 'barber_service' | 'barber_default' | 'goal_bonus')
                 }
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-2.5 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-2.5 py-2"
               >
                 <option value="barber_service">Barbeiro + Serviço</option>
                 <option value="barber_default">Padrão do Barbeiro</option>
@@ -159,11 +159,11 @@ export default function CommissionsPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Barbeiro</label>
+              <label className="mb-1 block text-[#A5A09A]">Barbeiro</label>
               <select
                 value={ruleBarberId || data.barbers[0]?.id}
                 onChange={(e) => setRuleBarberId(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-2.5 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-2.5 py-2"
               >
                 {data.barbers.map((b) => (
                   <option key={b.id} value={b.id}>
@@ -173,12 +173,12 @@ export default function CommissionsPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Serviço</label>
+              <label className="mb-1 block text-[#A5A09A]">Serviço</label>
               <select
                 disabled={ruleScope !== 'barber_service'}
                 value={ruleServiceId || data.services[0]?.id}
                 onChange={(e) => setRuleServiceId(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-2.5 py-2 disabled:opacity-40"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-2.5 py-2 disabled:opacity-40"
               >
                 {data.services.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -188,29 +188,29 @@ export default function CommissionsPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Tipo</label>
+              <label className="mb-1 block text-[#A5A09A]">Tipo</label>
               <select
                 value={ruleType}
                 onChange={(e) => setRuleType(e.target.value as 'percentage' | 'fixed')}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-2.5 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-2.5 py-2"
               >
                 <option value="percentage">Percentual (%)</option>
                 <option value="fixed">Valor Fixo (R$)</option>
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Valor</label>
+              <label className="mb-1 block text-[#A5A09A]">Valor</label>
               <input
                 type="number"
                 step="0.01"
                 value={ruleValue}
                 onChange={(e) => setRuleValue(Number(e.target.value))}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
             </div>
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#D49B6A] py-2 font-bold text-[#0E0906]"
+              className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#D99A4E] py-2 font-bold text-[#090909]"
             >
               <Plus className="h-4 w-4" />
               <span>Criar Regra</span>
@@ -219,18 +219,18 @@ export default function CommissionsPage() {
         )}
 
         {feedback && (
-          <div className="rounded-lg border border-[#D49B6A]/40 bg-[#D49B6A]/10 p-3 text-xs text-[#D49B6A]">
+          <div className="rounded-lg border border-[#D99A4E]/40 bg-[#D99A4E]/10 p-3 text-xs text-[#D99A4E]">
             {feedback}
           </div>
         )}
 
         {/* Extrato de Comissões */}
-        <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#18100C] p-5">
+        <div className="overflow-x-auto rounded-xl border border-[#292521] bg-[#151515] p-5">
           <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold">
-            <Coins className="h-4 w-4 text-[#D49B6A]" /> Extrato Individual de Comissões
+            <Coins className="h-4 w-4 text-[#D99A4E]" /> Extrato Individual de Comissões
           </h2>
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-white/10 text-[#B59E8D]">
+            <thead className="border-b border-[#292521] text-[#A5A09A]">
               <tr>
                 <th className="py-2 pr-4">Data</th>
                 <th className="py-2 pr-4">Profissional</th>
@@ -244,26 +244,26 @@ export default function CommissionsPage() {
             <tbody className="divide-y divide-white/5">
               {filtered.map((c) => (
                 <tr key={c.id}>
-                  <td className="py-3 pr-4 text-[#B59E8D]">{formatDateTimeBR(c.created_at)}</td>
-                  <td className="py-3 pr-4 font-semibold text-[#F7EFE6]">
+                  <td className="py-3 pr-4 text-[#A5A09A]">{formatDateTimeBR(c.created_at)}</td>
+                  <td className="py-3 pr-4 font-semibold text-[#F5F1EB]">
                     {data.barbers.find((b) => b.id === c.barber_id)?.name}
                   </td>
                   <td className="py-3 pr-4">{c.reference_label}</td>
                   <td className="py-3 pr-4">{formatCurrencyBRL(c.gross_base_amount)}</td>
-                  <td className="py-3 pr-4 text-[#B59E8D]">
+                  <td className="py-3 pr-4 text-[#A5A09A]">
                     {c.applied_rule_type === 'percentage'
                       ? `${c.applied_rule_value}%`
                       : `Fixo ${formatCurrencyBRL(c.applied_rule_value)}`}
                   </td>
-                  <td className="py-3 pr-4 font-bold text-[#D49B6A]">
+                  <td className="py-3 pr-4 font-bold text-[#D99A4E]">
                     {formatCurrencyBRL(c.final_amount)}
                   </td>
                   <td className="py-3">
                     <span
                       className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${
                         c.status === 'paid'
-                          ? 'bg-[#45C486]/15 text-[#45C486]'
-                          : 'bg-[#D49B6A]/15 text-[#D49B6A]'
+                          ? 'bg-[#16C784]/15 text-[#16C784]'
+                          : 'bg-[#D99A4E]/15 text-[#D99A4E]'
                       }`}
                     >
                       {c.status === 'paid' ? 'Pago' : 'Pendente'}

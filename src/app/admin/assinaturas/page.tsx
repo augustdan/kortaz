@@ -9,10 +9,10 @@ export default function AdminSubscriptionsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-serif text-3xl font-semibold">Assinaturas Ativas & Trials</h1>
-      <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#18100C] p-5">
+      <h1 className="font-display text-3xl font-semibold">Assinaturas Ativas & Trials</h1>
+      <div className="overflow-x-auto rounded-xl border border-[#292521] bg-[#151515] p-5">
         <table className="w-full text-left text-xs">
-          <thead className="border-b border-white/10 text-[#B59E8D]">
+          <thead className="border-b border-[#292521] text-[#A5A09A]">
             <tr>
               <th className="py-2 pr-4">Barbearia</th>
               <th className="py-2 pr-4">Plano</th>
@@ -29,7 +29,7 @@ export default function AdminSubscriptionsPage() {
               return (
                 <tr key={sub.id}>
                   <td className="py-3 pr-4 font-semibold">{t?.name}</td>
-                  <td className="py-3 pr-4 text-[#D49B6A]">{p?.name}</td>
+                  <td className="py-3 pr-4 text-[#D99A4E]">{p?.name}</td>
                   <td className="py-3 pr-4 uppercase">{sub.status}</td>
                   <td className="py-3 pr-4">{formatCurrencyBRL(sub.price_at_subscription)}</td>
                   <td className="py-3 pr-4">{formatCurrencyBRL(sub.discount_amount)}</td>

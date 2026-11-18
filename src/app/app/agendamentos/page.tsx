@@ -130,8 +130,8 @@ export default function AppointmentsPage() {
       <div className="space-y-6">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h1 className="font-serif text-3xl font-semibold">Agendamentos & Lista de Espera</h1>
-            <p className="text-xs text-[#B59E8D]">
+            <h1 className="font-display text-3xl font-semibold">Agendamentos & Lista de Espera</h1>
+            <p className="text-xs text-[#A5A09A]">
               Gerencie confirmações, encaixes, remarcações, faltas e lista de espera automática.
             </p>
           </div>
@@ -140,7 +140,7 @@ export default function AppointmentsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs"
+              className="rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs"
             >
               <option value="all">Todos os status</option>
               <option value="pending">Pendentes</option>
@@ -154,7 +154,7 @@ export default function AppointmentsPage() {
             <button
               type="button"
               onClick={() => setShowNewModal((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-lg bg-[#D49B6A] px-4 py-2 text-xs font-bold text-[#0E0906]"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#D99A4E] px-4 py-2 text-xs font-bold text-[#090909]"
             >
               <CalendarPlus className="h-4 w-4" />
               <span>Novo Agendamento / Encaixe</span>
@@ -163,7 +163,7 @@ export default function AppointmentsPage() {
         </div>
 
         {actionMsg && (
-          <div className="rounded-lg border border-[#D49B6A]/40 bg-[#D49B6A]/10 p-3 text-xs text-[#D49B6A]">
+          <div className="rounded-lg border border-[#D99A4E]/40 bg-[#D99A4E]/10 p-3 text-xs text-[#D99A4E]">
             {actionMsg}
           </div>
         )}
@@ -171,14 +171,14 @@ export default function AppointmentsPage() {
         {showNewModal && (
           <form
             onSubmit={handleCreateAppointment}
-            className="rounded-xl border border-[#D49B6A]/40 bg-[#18100C] p-5 space-y-4 text-xs"
+            className="rounded-xl border border-[#D99A4E]/40 bg-[#151515] p-5 space-y-4 text-xs"
           >
-            <h2 className="text-sm font-bold text-[#F7EFE6]">Novo Agendamento ou Encaixe</h2>
+            <h2 className="text-sm font-bold text-[#F5F1EB]">Novo Agendamento ou Encaixe</h2>
             <div className="grid gap-3 sm:grid-cols-3">
               <select
                 value={branchId || data.branches[0]?.id}
                 onChange={(e) => setBranchId(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               >
                 {data.branches.map((b) => (
                   <option key={b.id} value={b.id}>
@@ -189,7 +189,7 @@ export default function AppointmentsPage() {
               <select
                 value={serviceId || data.services[0]?.id}
                 onChange={(e) => setServiceId(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               >
                 {data.services.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -200,7 +200,7 @@ export default function AppointmentsPage() {
               <select
                 value={barberId}
                 onChange={(e) => setBarberId(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               >
                 <option value="">Qualquer profissional disponível</option>
                 {data.barbers.map((b) => (
@@ -217,14 +217,14 @@ export default function AppointmentsPage() {
                 required
                 value={dateStr}
                 onChange={(e) => setDateStr(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
               <input
                 type="time"
                 required
                 value={timeStr}
                 onChange={(e) => setTimeStr(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
               <input
                 type="text"
@@ -232,7 +232,7 @@ export default function AppointmentsPage() {
                 placeholder="Nome do cliente"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
               <input
                 type="tel"
@@ -240,12 +240,12 @@ export default function AppointmentsPage() {
                 placeholder="WhatsApp"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
               <select
                 value={source}
                 onChange={(e) => setSource(e.target.value as 'admin' | 'squeeze_in' | 'recurring')}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               >
                 <option value="admin">Agendamento normal</option>
                 <option value="squeeze_in">Encaixe</option>
@@ -254,7 +254,7 @@ export default function AppointmentsPage() {
             </div>
 
             {formError && (
-              <div className="flex items-center justify-between rounded-lg border border-[#E06258]/40 bg-[#E06258]/10 p-3 text-[#E06258]">
+              <div className="flex items-center justify-between rounded-lg border border-[#EF5350]/40 bg-[#EF5350]/10 p-3 text-[#EF5350]">
                 <span className="flex items-center gap-2">
                   <AlertCircle className="h-4 w-4" />
                   {formError}
@@ -262,7 +262,7 @@ export default function AppointmentsPage() {
                 {limitUpgradeLink && (
                   <Link
                     href="/app/assinatura"
-                    className="rounded bg-[#D49B6A] px-3 py-1 font-bold text-[#0E0906]"
+                    className="rounded bg-[#D99A4E] px-3 py-1 font-bold text-[#090909]"
                   >
                     Fazer Upgrade
                   </Link>
@@ -274,13 +274,13 @@ export default function AppointmentsPage() {
               <button
                 type="button"
                 onClick={() => setShowNewModal(false)}
-                className="rounded-lg border border-white/15 px-4 py-2"
+                className="rounded-lg border border-[#292521] px-4 py-2"
               >
                 Fechar
               </button>
               <button
                 type="submit"
-                className="rounded-lg bg-[#D49B6A] px-5 py-2 font-bold text-[#0E0906]"
+                className="rounded-lg bg-[#D99A4E] px-5 py-2 font-bold text-[#090909]"
               >
                 Confirmar Horário
               </button>
@@ -299,28 +299,28 @@ export default function AppointmentsPage() {
             return (
               <div
                 key={appt.id}
-                className="rounded-xl border border-white/10 bg-[#18100C] p-4"
+                className="rounded-xl border border-[#292521] bg-[#151515] p-4"
               >
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                   <div className="space-y-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-sm font-bold text-[#F7EFE6]">
+                      <span className="text-sm font-bold text-[#F5F1EB]">
                         {customer?.full_name || 'Cliente'}
                       </span>
-                      <span className="rounded bg-[#0E0906] px-2 py-0.5 text-[10px] uppercase tracking-wider text-[#D49B6A]">
+                      <span className="rounded bg-[#090909] px-2 py-0.5 text-[10px] uppercase tracking-wider text-[#D99A4E]">
                         {appt.status}
                       </span>
                       {appt.is_recurring && (
-                        <span className="rounded bg-[#45C486]/15 px-2 py-0.5 text-[10px] text-[#45C486]">
+                        <span className="rounded bg-[#16C784]/15 px-2 py-0.5 text-[10px] text-[#16C784]">
                           Recorrente
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-[#B59E8D]">
+                    <p className="text-xs text-[#A5A09A]">
                       {formatDateTimeBR(appt.starts_at)} &bull;{' '}
-                      <strong className="text-[#F7EFE6]">{barber?.name}</strong> &bull; {branch?.name}
+                      <strong className="text-[#F5F1EB]">{barber?.name}</strong> &bull; {branch?.name}
                     </p>
-                    <p className="text-xs text-[#D49B6A]">
+                    <p className="text-xs text-[#D99A4E]">
                       {svcs.map((s) => s.service_name).join(' + ')} &bull;{' '}
                       {formatCurrencyBRL(appt.total_amount)}
                     </p>
@@ -331,7 +331,7 @@ export default function AppointmentsPage() {
                       <button
                         type="button"
                         onClick={() => runAction(appt.id, 'confirm')}
-                        className="rounded-lg border border-[#D49B6A]/50 px-3 py-1.5 text-[#D49B6A]"
+                        className="rounded-lg border border-[#D99A4E]/50 px-3 py-1.5 text-[#D99A4E]"
                       >
                         Confirmar
                       </button>
@@ -343,28 +343,28 @@ export default function AppointmentsPage() {
                         <button
                           type="button"
                           onClick={() => runAction(appt.id, 'complete')}
-                          className="inline-flex items-center gap-1 rounded-lg bg-[#45C486] px-3 py-1.5 font-bold text-[#0E0906]"
+                          className="inline-flex items-center gap-1 rounded-lg bg-[#16C784] px-3 py-1.5 font-bold text-[#090909]"
                         >
                           <Check className="h-3.5 w-3.5" /> Concluir & Receber
                         </button>
                         <button
                           type="button"
                           onClick={() => setRescheduleTargetId(appt.id)}
-                          className="inline-flex items-center gap-1 rounded-lg border border-white/15 px-3 py-1.5"
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#292521] px-3 py-1.5"
                         >
                           <RefreshCw className="h-3.5 w-3.5" /> Remarcar
                         </button>
                         <button
                           type="button"
                           onClick={() => runAction(appt.id, 'no_show')}
-                          className="inline-flex items-center gap-1 rounded-lg border border-white/15 px-3 py-1.5 text-[#B59E8D]"
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#292521] px-3 py-1.5 text-[#A5A09A]"
                         >
                           <UserX className="h-3.5 w-3.5" /> Faltou
                         </button>
                         <button
                           type="button"
                           onClick={() => runAction(appt.id, 'cancel')}
-                          className="inline-flex items-center gap-1 rounded-lg border border-[#E06258]/40 px-3 py-1.5 text-[#E06258]"
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#EF5350]/40 px-3 py-1.5 text-[#EF5350]"
                         >
                           <X className="h-3.5 w-3.5" /> Cancelar
                         </button>
@@ -374,30 +374,30 @@ export default function AppointmentsPage() {
                 </div>
 
                 {rescheduleTargetId === appt.id && (
-                  <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-white/10 pt-3 text-xs">
+                  <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-[#292521] pt-3 text-xs">
                     <input
                       type="date"
                       value={rescheduleDate}
                       onChange={(e) => setRescheduleDate(e.target.value)}
-                      className="rounded border border-white/10 bg-[#0E0906] px-2.5 py-1.5"
+                      className="rounded border border-[#292521] bg-[#090909] px-2.5 py-1.5"
                     />
                     <input
                       type="time"
                       value={rescheduleTime}
                       onChange={(e) => setRescheduleTime(e.target.value)}
-                      className="rounded border border-white/10 bg-[#0E0906] px-2.5 py-1.5"
+                      className="rounded border border-[#292521] bg-[#090909] px-2.5 py-1.5"
                     />
                     <button
                       type="button"
                       onClick={() => runAction(appt.id, 'reschedule')}
-                      className="rounded bg-[#D49B6A] px-3 py-1.5 font-bold text-[#0E0906]"
+                      className="rounded bg-[#D99A4E] px-3 py-1.5 font-bold text-[#090909]"
                     >
                       Salvar Novo Horário
                     </button>
                     <button
                       type="button"
                       onClick={() => setRescheduleTargetId(null)}
-                      className="text-[#B59E8D]"
+                      className="text-[#A5A09A]"
                     >
                       Cancelar
                     </button>
@@ -409,21 +409,21 @@ export default function AppointmentsPage() {
         </div>
 
         {/* Lista de Espera Automática */}
-        <div className="rounded-xl border border-white/10 bg-[#18100C] p-5">
-          <h2 className="text-sm font-semibold text-[#F7EFE6]">
+        <div className="rounded-xl border border-[#292521] bg-[#151515] p-5">
+          <h2 className="text-sm font-semibold text-[#F5F1EB]">
             Fila da Lista de Espera ({data.waitlistEntries.length})
           </h2>
           <div className="mt-3 space-y-2 text-xs">
             {data.waitlistEntries.map((w) => (
               <div
                 key={w.id}
-                className="flex items-center justify-between rounded-lg border border-white/5 bg-[#0E0906] px-3 py-2"
+                className="flex items-center justify-between rounded-lg border border-[#292521]/70 bg-[#090909] px-3 py-2"
               >
                 <span>
                   {data.customers.find((c) => c.id === w.customer_id)?.full_name} — Data desejada:{' '}
                   {w.desired_date.split('-').reverse().join('/')}
                 </span>
-                <span className="rounded bg-[#D49B6A]/15 px-2 py-0.5 text-[10px] font-bold uppercase text-[#D49B6A]">
+                <span className="rounded bg-[#D99A4E]/15 px-2 py-0.5 text-[10px] font-bold uppercase text-[#D99A4E]">
                   {w.status}
                 </span>
               </div>

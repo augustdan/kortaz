@@ -1,25 +1,111 @@
-﻿import Link from 'next/link';
+﻿import Image from 'next/image';
+import Link from 'next/link';
 import {
+  ArrowRight,
+  BarChart3,
+  Building2,
   Calendar,
-  Check,
-  CreditCard,
+  CalendarCheck2,
+  CheckCircle2,
+  Coins,
+  Crown,
+  Gem,
+  Globe,
+  Megaphone,
+  Package,
   Scissors,
   ShieldCheck,
   Sparkles,
+  Star,
+  UserCheck,
   Users,
+  Wallet,
 } from 'lucide-react';
 import { BrandLogo } from '@/components/ui/BrandLogo';
-import {
-  HudCrosshair,
-  HudDotPill,
-  HudFrame,
-  HudPerformanceWidget,
-  HudPillArrowButton,
-} from '@/components/ui/HudPrimitives';
+import { LandingHeader, PlansSectionClient } from '@/components/public/LandingInteractive';
 import { readDb } from '@/lib/server/store';
 import { formatCurrencyBRL } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
+
+const SEGMENTS = [
+  { label: 'Barbearias', icon: Scissors },
+  { label: 'Salões de Beleza', icon: Sparkles },
+  { label: 'Beleza e Estilo', icon: Star },
+  { label: 'Estética Avançada', icon: Crown },
+  { label: 'Cuidados Masculinos', icon: Gem },
+];
+
+const PRODUCT_BENEFITS = [
+  'Agendamento online e presencial.',
+  'Controle financeiro e comissões.',
+  'CRM de clientes e fidelidade.',
+  'Marketing e promoções.',
+  'Relatórios completos.',
+];
+
+const FEATURES = [
+  {
+    icon: Calendar,
+    title: 'Agenda inteligente',
+    description:
+      'Grade diária, semanal e mensal sem conflitos de horário, com bloqueios e encaixes rápidos.',
+  },
+  {
+    icon: UserCheck,
+    title: 'Gestão de profissionais',
+    description:
+      'Controle escalas, especialidades, serviços atendidos e produtividade por especialista.',
+  },
+  {
+    icon: Users,
+    title: 'Cadastro de clientes',
+    description:
+      'CRM completo com histórico de visitas, preferências, total gasto e programa de fidelidade.',
+  },
+  {
+    icon: Wallet,
+    title: 'Financeiro',
+    description:
+      'Fluxo de caixa, entradas, saídas, fechamento diário e recebimentos integrados.',
+  },
+  {
+    icon: Coins,
+    title: 'Comissões automáticas',
+    description:
+      'Regras flexíveis por profissional ou serviço com fechamento transparente e zero planilha.',
+  },
+  {
+    icon: Package,
+    title: 'Controle de estoque',
+    description:
+      'Alertas de estoque mínimo, entradas, saídas e histórico de produtos profissionais e revenda.',
+  },
+  {
+    icon: Megaphone,
+    title: 'Marketing',
+    description:
+      'Campanhas, cupons promocionais e notificações automáticas integradas ao WhatsApp.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Relatórios',
+    description:
+      'Indicadores reais de faturamento, ticket médio, retenção e serviços mais vendidos.',
+  },
+  {
+    icon: Globe,
+    title: 'Agendamento online',
+    description:
+      'Vitrine exclusiva do seu estabelecimento para clientes agendarem 24h pelo celular.',
+  },
+  {
+    icon: Building2,
+    title: 'Gestão de unidades',
+    description:
+      'Administre uma ou múltiplas unidades com isolamento de equipe e visão consolidada.',
+  },
+];
 
 export default async function HomeLandingPage() {
   const db = await readDb();
@@ -27,304 +113,99 @@ export default async function HomeLandingPage() {
     .filter((p) => p.is_active)
     .sort((a, b) => a.sort_order - b.sort_order);
 
+  const realReviews = db.reviews
+    .filter((r) => r.is_published && r.comment.trim().length > 0)
+    .slice(0, 3)
+    .map((r) => {
+      const customer = db.customers.find((c) => c.id === r.customer_id);
+      const tenant = db.tenants.find((t) => t.id === r.tenant_id);
+      return {
+        id: r.id,
+        rating: r.overall_rating,
+        comment: r.comment,
+        author: customer?.full_name || 'Cliente verificado',
+        establishment: tenant?.name || 'Estabelecimento Kortaz',
+      };
+    });
+
+  const featuresByPlanId = new Map<string, string[]>();
+  for (const feat of db.subscription_features) {
+    if (!feat.is_enabled) continue;
+    const list = featuresByPlanId.get(feat.plan_id) || [];
+    list.push(feat.label);
+    featuresByPlanId.set(feat.plan_id, list);
+  }
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#0E0906] text-[#F7EFE6]">
-      {/* HEADER MINIMALISTA HUD */}
-      <header className="sticky top-0 z-50 border-b border-[#D49B6A]/10 bg-[#0E0906]/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <BrandLogo subtitle="BARBEARIA & SALÃO OS" title="KOR" accent="TAZ" />
+    <div id="inicio" className="min-h-screen overflow-x-hidden bg-[#090909] text-[#F5F1EB]">
+      <LandingHeader />
 
-          <nav className="hidden items-center gap-8 text-xs font-medium tracking-widest text-[#B59E8D] md:flex">
-            <a href="#arquitetura" className="transition-colors hover:text-[#F7EFE6]">
-              TECNOLOGIA
-            </a>
-            <a href="#unissex" className="transition-colors hover:text-[#F7EFE6]">
-              BARBEARIA &amp; SALÃO
-            </a>
-            <Link href="/precos" className="transition-colors hover:text-[#F7EFE6]">
-              PLANOS
-            </Link>
-            <Link href="/s/barbearia-exclusiva" className="transition-colors hover:text-[#D49B6A]">
-              DEMO AO VIVO
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="hidden rounded-full border border-[#D49B6A]/25 px-4 py-2 text-xs font-medium text-[#F7EFE6] transition-colors hover:border-[#D49B6A] sm:inline-block"
-            >
-              Entrar
-            </Link>
-            <HudPillArrowButton href="/cadastro" label="Começar" />
-          </div>
-        </div>
-      </header>
-
-      {/* =====================================================================
-          PAINEL 1 — HERO "KORTAZ TECH" (Inspirado no 1º painel da referência)
-          ===================================================================== */}
-      <section className="relative overflow-hidden border-b border-[#D49B6A]/10 py-14 sm:py-20">
-        {/* Glow radial marrom/bronze ao centro */}
+      {/* 5.2 HERO */}
+      <section className="relative overflow-hidden border-b border-[#292521]">
         <div className="hud-radial-glow pointer-events-none absolute inset-0" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-24">
+          <div className="z-10 lg:col-span-6">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#292521] bg-[#151515] px-3.5 py-1.5 text-xs font-medium text-[#D99A4E]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#D99A4E]" />
+              SaaS completo para barbearias e salões
+            </span>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.26em] text-[#B59E8D]">
-            <span>• APRESENTAÇÃO KORTAZ OS</span>
-            <span className="hidden sm:inline">BARBEARIAS MASCULINAS &amp; SALÕES FEMININOS</span>
-          </div>
-
-          {/* Título gigante ao fundo + 3 cartões de vidro inclinados */}
-          <div className="relative mt-6 flex flex-col items-center text-center">
-            <h1 className="pointer-events-none select-none font-serif text-6xl font-semibold tracking-tight text-[#F7EFE6]/15 sm:text-8xl lg:text-[9.5rem] lg:leading-none">
-              Kortaz Tech
+            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-[#F5F1EB] sm:text-5xl lg:text-[3.5rem]">
+              Sua barbearia ou salão no{' '}
+              <span className="text-[#D99A4E]">próximo nível</span>.
             </h1>
 
-            {/* Grid de composição central com Callout lateral e cartões 3D */}
-            <div className="relative -mt-6 grid w-full items-center gap-8 lg:-mt-14 lg:grid-cols-12">
-              {/* Esquerda: Copy + Botão Pílula */}
-              <div className="order-2 flex flex-col items-start text-left lg:order-1 lg:col-span-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#D49B6A]">
-                  GESTÃO DE ALTA ESTÉTICA
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-[#B59E8D]">
-                  Soluções inteligentes feitas para simplificar agendamentos, pagamentos via Pix,
-                  comissões e fidelidade — tanto para barbearias masculinas quanto para salões e
-                  cabeleireiras femininas.
-                </p>
-                <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <HudPillArrowButton href="/cadastro" label="Começar" />
-                  <Link
-                    href="/s/barbearia-exclusiva"
-                    className="rounded-full border border-[#D49B6A]/25 px-4 py-2.5 text-xs font-medium text-[#D49B6A] transition-colors hover:border-[#D49B6A] hover:bg-[#D49B6A]/10"
-                  >
-                    Abrir Demo Unissex
-                  </Link>
-                </div>
-              </div>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#A5A09A] sm:text-lg">
+              Agende, organize, fidelize e cresça com o Kortaz. A plataforma completa para gestão do
+              seu negócio, de forma simples, moderna e eficiente.
+            </p>
 
-              {/* Centro: 3 Placas Translúcidas em Perspectiva (inspirado nos 3 cartões flutuantes) */}
-              <div className="order-1 flex justify-center lg:order-2 lg:col-span-5">
-                <div className="relative flex h-72 w-full max-w-md items-center justify-center sm:h-80">
-                  {/* Card Traseiro (Escuro) */}
-                  <div className="hud-panel absolute left-6 top-6 h-48 w-40 -rotate-12 rounded-2xl p-4 sm:w-44">
-                    <Sparkles className="h-5 w-5 text-[#D49B6A]" />
-                    <p className="mt-10 text-[10px] uppercase tracking-widest text-[#B59E8D]">
-                      SALÃO FEMININO
-                    </p>
-                    <p className="mt-1 font-serif text-lg font-semibold text-[#F7EFE6]">
-                      Mechas &amp; Visagismo
-                    </p>
-                  </div>
-
-                  {/* Card Intermediário (Conhaque Brilhante) */}
-                  <div className="absolute z-10 h-52 w-44 -rotate-3 rounded-2xl border border-[#F7EFE6]/30 bg-gradient-to-br from-[#E5B386]/90 via-[#B87A4B]/80 to-[#3D2212]/95 p-4 text-[#0E0906] shadow-2xl sm:w-48">
-                    <div className="flex items-center justify-between">
-                      <Scissors className="h-5 w-5 text-[#0E0906]" />
-                      <span className="rounded-full bg-[#0E0906]/20 px-2 py-0.5 text-[10px] font-bold">
-                        PIX REAL
-                      </span>
-                    </div>
-                    <p className="mt-14 text-[10px] font-bold uppercase tracking-widest text-[#0E0906]/75">
-                      BARBEARIA &amp; SALÃO
-                    </p>
-                    <p className="mt-1 font-serif text-xl font-bold leading-tight text-[#0E0906]">
-                      Agenda Anti-Conflito
-                    </p>
-                  </div>
-
-                  {/* Card Frontal Direito (Vidro Espresso) */}
-                  <div className="hud-panel absolute bottom-4 right-5 z-20 h-48 w-40 rotate-12 rounded-2xl p-4 sm:w-44">
-                    <CreditCard className="h-5 w-5 text-[#D49B6A]" />
-                    <p className="mt-12 text-[10px] uppercase tracking-widest text-[#B59E8D]">
-                      COMISSÕES &amp; CAIXA
-                    </p>
-                    <p className="mt-1 font-serif text-lg font-semibold text-[#F7EFE6]">
-                      Repasse Automático
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Direita: Callout HUD "+15K Atendimentos" + Moldura Editorial */}
-              <div className="order-3 flex flex-col items-end gap-4 lg:col-span-3">
-                <div className="w-full max-w-[240px] border-l border-[#D49B6A]/40 pl-4 text-left">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-mono text-2xl font-bold text-[#F7EFE6]">+15K</span>
-                    <span className="text-xs text-[#B59E8D]">Clientes atendidos</span>
-                  </div>
-                  <div className="mt-2 flex items-center gap-2 text-xs text-[#D49B6A]">
-                    <span className="h-2 w-2 rounded-full bg-[#F7EFE6] shadow-[0_0_8px_#D49B6A]" />
-                    <span>Sistema seguro com RLS</span>
-                  </div>
-                </div>
-
-                <HudFrame className="w-full max-w-[240px] overflow-hidden rounded-xl p-1.5">
-                  <img
-                    src="/assets/hero/hero-hud-barber-man.jpg"
-                    alt="Barbearia masculina em ambiente marrom espresso"
-                    className="aspect-[4/3] w-full rounded-lg object-cover"
-                  />
-                  <div className="flex items-center justify-between px-2 py-1.5 text-[10px] text-[#B59E8D]">
-                    <span>BARBEARIA &amp; ESTÉTICA</span>
-                    <span className="text-[#D49B6A]">24/7 ONLINE</span>
-                  </div>
-                </HudFrame>
-              </div>
+            <div className="mt-8 flex flex-wrap items-center gap-3.5">
+              <Link
+                href="/cadastro"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#D99A4E] px-6 py-3.5 text-sm font-bold text-[#090909] shadow-[0_12px_32px_-12px_rgba(217,154,78,0.55)] transition-colors hover:bg-[#F2B968]"
+              >
+                Comece grátis agora
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href="#produto"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#292521] bg-[#151515] px-6 py-3.5 text-sm font-semibold text-[#F5F1EB] transition-colors hover:border-[#D99A4E]/50 hover:bg-[#1B1B1B]"
+              >
+                Conhecer o sistema
+              </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* =====================================================================
-          PAINEL 2 — SHOWCASE CROSSHAIR COM PEDESTAL DE FERRAMENTAS (Painel 2)
-          ===================================================================== */}
-      <section
-        id="arquitetura"
-        className="relative border-b border-[#D49B6A]/10 bg-[#120B07] py-16 sm:py-24"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <HudFrame className="rounded-3xl p-6 sm:p-12">
-            <div className="grid items-center gap-10 lg:grid-cols-12">
-              {/* Esquerda: Mini Card + Descrição */}
-              <div className="space-y-4 lg:col-span-3">
-                <div className="hud-panel overflow-hidden rounded-2xl p-3">
-                  <img
-                    src="/assets/services/service-women-hair.jpg"
-                    alt="Finalização feminina em salão de beleza"
-                    className="aspect-square w-full rounded-xl object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-[#F7EFE6]">
-                    Experiência Unissex Real
-                  </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-[#B59E8D]">
-                    Serviços e agendas específicas para barbeiros masculinos e cabeleireiras /
-                    coloristas femininas.
-                  </p>
-                </div>
-              </div>
-
-              {/* Centro: Título + Pedestal de Ferramentas */}
-              <div className="text-center lg:col-span-6">
-                <h2 className="font-serif text-3xl font-medium leading-tight text-[#F7EFE6] sm:text-4xl">
-                  Gestão moderna para{' '}
-                  <span className="text-[#D49B6A]">operações fluidas e lucrativas</span>
-                </h2>
-
-                <div className="relative mx-auto mt-6 max-w-md overflow-hidden rounded-2xl border border-[#D49B6A]/20 bg-[#0E0906]">
-                  <img
-                    src="/assets/hero/hero-hud-tools-pedestal.jpg"
-                    alt="Ferramentas de barbearia e salão em bronze sobre pedra escura"
-                    className="aspect-[16/11] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E0906] via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-[#F7EFE6]">
-                    <span className="rounded-full bg-[#0E0906]/80 px-3 py-1 border border-[#D49B6A]/30">
-                      Estoque + Consumo por Serviço
-                    </span>
-                    <span className="rounded-full bg-[#D49B6A] px-3 py-1 font-bold text-[#0E0906]">
-                      Zero Conflitos
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Direita: Callout + Botão Dot Pill */}
-              <div className="flex flex-col items-start space-y-6 lg:col-span-3">
-                <div className="border-l border-[#D49B6A]/40 pl-4">
-                  <span className="mb-2 block h-2 w-2 rounded-full bg-[#F7EFE6] shadow-[0_0_10px_#D49B6A]" />
-                  <p className="text-xs leading-relaxed text-[#B59E8D]">
-                    Controle de caixa com sangria, suprimento, comissões imutáveis e pagamento Pix
-                    Mercado Pago validado por webhook.
-                  </p>
-                </div>
-                <HudDotPill href="/s/barbearia-exclusiva" label="Explorar agora" />
-              </div>
-            </div>
-          </HudFrame>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          PAINEL 3 — RETRATO EDITORIAL + WIDGET "PERFORMANCE +135%" (Painel 3)
-          ===================================================================== */}
-      <section
-        id="unissex"
-        className="relative overflow-hidden border-b border-[#D49B6A]/10 py-16 sm:py-24"
-      >
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(circle at 48% 50%, rgba(168, 107, 62, 0.34) 0%, rgba(72, 40, 22, 0.22) 42%, rgba(14, 9, 6, 0.96) 78%)',
-          }}
-        />
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-12">
-            {/* Retrato Editorial com Halo Circular + Card Performance */}
-            <div className="relative lg:col-span-6">
-              <div className="relative mx-auto max-w-md">
-                {/* Halo circular arquitetônico */}
-                <div className="pointer-events-none absolute -left-8 -top-8 h-64 w-64 rounded-full border border-[#F7EFE6]/15" />
-
-                <div className="overflow-hidden rounded-3xl border border-[#D49B6A]/25 bg-[#18100C] shadow-2xl">
-                  <img
-                    src="/assets/hero/hero-hud-woman-salon.jpg"
-                    alt="Salão de beleza e cabeleireira feminina em tons marrom bronze"
-                    className="aspect-[4/5] w-full object-cover"
-                  />
-                </div>
-
-                {/* Widget Flutuante Performance +135% */}
-                <HudPerformanceWidget
-                  title="Performance"
-                  metric="+135%"
-                  caption="Retenção & Ticket Médio"
-                  className="mt-4 sm:absolute sm:-left-10 sm:bottom-10 sm:mt-0 sm:w-64"
+          <div className="lg:col-span-6">
+            <div className="relative overflow-hidden rounded-2xl border border-[#292521] bg-[#111111] shadow-[0_32px_80px_-28px_rgba(0,0,0,0.95)]">
+              <div className="relative aspect-[16/10] w-full">
+                <Image
+                  src="/assets/hero/kortaz2-hero.jpg"
+                  alt="Interior contemporâneo de barbearia e salão de luxo com iluminação bronze"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#090909]/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090909]/75 via-transparent to-transparent" />
               </div>
-            </div>
-
-            {/* Direita: Tipografia Editorial + Botão "Ver plataforma >" */}
-            <div className="space-y-6 lg:col-span-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#D49B6A]">
-                ESTÉTICA PARA ELE E PARA ELA
-              </p>
-              <h2 className="font-serif text-4xl font-medium leading-[1.08] text-[#F7EFE6] sm:text-6xl">
-                Gestão Inteligente{' '}
-                <span className="text-[#D49B6A]">para Barbearias e Salões Modernos</span>
-              </h2>
-              <p className="max-w-lg text-sm leading-relaxed text-[#B59E8D]">
-                Da barbearia clássica ao salão de beleza e colorimetria feminina: centralize
-                agendamentos recorrentes, lista de espera automática, recuperação de clientes
-                inativos no WhatsApp, cartão fidelidade e multiunidades no mesmo painel.
-              </p>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="hud-panel rounded-2xl p-4">
-                  <p className="text-xs font-bold text-[#D49B6A]">BARBEARIA MASCULINA</p>
-                  <p className="mt-1 text-xs text-[#B59E8D]">
-                    Skin fade, barboterapia, pacotes mensais e comissão instantânea por barbeiro.
+              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#292521] bg-[#151515]/90 px-4 py-3 backdrop-blur-md">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#D99A4E]">
+                    Multi-tenant em tempo real
+                  </p>
+                  <p className="text-xs font-medium text-[#F5F1EB]">
+                    Agenda, Pix, Comissões &amp; CRM integrados
                   </p>
                 </div>
-                <div className="hud-panel rounded-2xl p-4">
-                  <p className="text-xs font-bold text-[#D49B6A]">SALÃO &amp; CABELEIREIRA</p>
-                  <p className="mt-1 text-xs text-[#B59E8D]">
-                    Mechas, escova, cronograma capilar com baixa automática de insumos no estoque.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-2 flex flex-wrap items-center gap-4">
-                <HudPillArrowButton href="/login" label="Ver plataforma" />
                 <Link
                   href="/s/barbearia-exclusiva"
-                  className="text-xs font-semibold text-[#D49B6A] underline underline-offset-4 hover:text-[#E5B386]"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#1B1B1B] px-3 py-1.5 text-xs font-semibold text-[#F2B968] border border-[#D99A4E]/30 hover:border-[#D99A4E]"
                 >
-                  Testar agendamento completo &rarr;
+                  Ver vitrine demo
+                  <ArrowRight className="h-3 w-3" />
                 </Link>
               </div>
             </div>
@@ -332,138 +213,353 @@ export default async function HomeLandingPage() {
         </div>
       </section>
 
-      {/* =====================================================================
-          PAINEL 4 — FRAME HUD & PLANOS TRANSPARENTES (Painel 4 da referência)
-          ===================================================================== */}
-      <section className="relative py-16 sm:py-24">
+      {/* 5.3 SEGMENTOS ATENDIDOS */}
+      <section className="border-b border-[#292521] bg-[#0C0C0C] py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative mx-auto max-w-3xl border border-[#D49B6A]/20 bg-[#18100C]/35 px-6 py-12 text-center">
-            <HudCrosshair className="absolute -left-1.5 -top-1.5" />
-            <HudCrosshair className="absolute -right-1.5 -top-1.5" />
-            <HudCrosshair className="absolute -bottom-1.5 -left-1.5" />
-            <HudCrosshair className="absolute -bottom-1.5 -right-1.5" />
-
-            <div className="mb-6 flex flex-wrap items-center justify-center gap-4 sm:justify-between">
-              <HudDotPill label="Recursos chave" />
-              <HudDotPill label="Sistema seguro multi-tenant" />
-            </div>
-
-            <h2 className="font-serif text-3xl font-medium text-[#F7EFE6] sm:text-5xl">
-              Agendamento, caixa e fidelidade{' '}
-              <span className="font-semibold text-[#D49B6A]">simples para o seu time.</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-[#B59E8D] sm:text-sm">
-              Construído para transações rápidas no celular do profissional e controle financeiro
-              rigoroso para proprietários e redes multiunidades.
-            </p>
-          </div>
-
-          {/* Planos SaaS Transparentes */}
-          <div className="mt-14 grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {plans.map((plan) => (
+          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-[#A5A09A]">
+            Feito para negócios de estética e atendimento com hora marcada
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {SEGMENTS.map((seg) => (
               <div
-                key={plan.id}
-                className={`flex flex-col justify-between rounded-2xl p-5 transition-all ${
-                  plan.is_popular
-                    ? 'border border-[#D49B6A] bg-[#241710] shadow-xl shadow-[#D49B6A]/10'
-                    : 'hud-panel'
-                }`}
+                key={seg.label}
+                className="flex items-center justify-center gap-2.5 rounded-xl border border-[#292521] bg-[#151515] px-4 py-3 text-xs font-semibold text-[#F5F1EB]"
               >
-                <div>
-                  {plan.is_popular && (
-                    <span className="mb-2 inline-block rounded-full bg-[#D49B6A] px-2.5 py-0.5 text-[10px] font-bold uppercase text-[#0E0906]">
-                      Mais Escolhido
-                    </span>
-                  )}
-                  <h3 className="text-sm font-bold text-[#F7EFE6]">{plan.name}</h3>
-                  <p className="mt-2 text-2xl font-bold text-[#D49B6A]">
-                    {plan.is_custom_pricing
-                      ? 'Sob consulta'
-                      : plan.price_monthly === 0
-                        ? 'R$ 0'
-                        : formatCurrencyBRL(plan.price_monthly)}
-                    {!plan.is_custom_pricing && (
-                      <span className="text-[11px] font-normal text-[#B59E8D]">/mês</span>
-                    )}
-                  </p>
-                  <p className="mt-2 text-[11px] text-[#B59E8D]">{plan.tagline}</p>
-
-                  <ul className="mt-4 space-y-1.5 text-[11px] text-[#F7EFE6]">
-                    <li className="flex items-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#45C486]" />
-                      <span>
-                        {plan.max_barbers === null
-                          ? 'Profissionais ilimitados'
-                          : `Até ${plan.max_barbers} profissiona${plan.max_barbers > 1 ? 'is' : 'l'}`}
-                      </span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#45C486]" />
-                      <span>
-                        {plan.max_monthly_appointments === null
-                          ? 'Agendamentos ilimitados'
-                          : `Até ${plan.max_monthly_appointments}/mês`}
-                      </span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#45C486]" />
-                      <span>
-                        {plan.max_branches >= 999
-                          ? 'Unidades ilimitadas'
-                          : `${plan.max_branches} unidade${plan.max_branches > 1 ? 's' : ''}`}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-
-                <Link
-                  href={`/cadastro?plan=${plan.code}`}
-                  className={`mt-5 block rounded-full py-2 text-center text-xs font-bold transition-colors ${
-                    plan.is_popular
-                      ? 'bg-[#D49B6A] text-[#0E0906] hover:bg-[#E5B386]'
-                      : 'border border-[#D49B6A]/30 text-[#F7EFE6] hover:border-[#D49B6A]'
-                  }`}
-                >
-                  Selecionar
-                </Link>
+                <seg.icon className="h-4 w-4 text-[#D99A4E]" />
+                <span>{seg.label}</span>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-6 flex items-start gap-3 rounded-2xl border border-[#D49B6A]/15 bg-[#18100C] p-4 text-xs text-[#B59E8D]">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#45C486]" />
-            <span>
-              <strong className="text-[#F7EFE6]">Sem taxas ocultas:</strong> o valor acima cobre 100%
-              da plataforma Kortaz OS. Taxas do Mercado Pago (Pix/Cartão) e WhatsApp Business API
-              são cobradas diretamente pelos respectivos provedores.
+      {/* 5.4 APRESENTAÇÃO DO PRODUTO */}
+      <section id="produto" className="border-b border-[#292521] py-20 sm:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+          <div className="lg:col-span-5">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D99A4E]">
+              TUDO O QUE VOCÊ PRECISA
             </span>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-[#F5F1EB] sm:text-4xl">
+              Gestão completa em <span className="text-[#D99A4E]">um só lugar</span>.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-[#A5A09A] sm:text-base">
+              Do agendamento ao financeiro, o Kortaz cuida de tudo para você focar no que realmente
+              importa: seus clientes.
+            </p>
+
+            <ul className="mt-7 space-y-3">
+              {PRODUCT_BENEFITS.map((benefit) => (
+                <li key={benefit} className="flex items-center gap-3 text-sm text-[#F5F1EB]">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D99A4E]" />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8">
+              <a
+                href="#recursos"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#292521] bg-[#151515] px-5 py-3 text-xs font-semibold text-[#F5F1EB] transition-colors hover:border-[#D99A4E]/60"
+              >
+                Explorar todos os recursos
+                <ArrowRight className="h-3.5 w-3.5 text-[#D99A4E]" />
+              </a>
+            </div>
+          </div>
+
+          {/* Mockup realista em HTML/CSS/React do Dashboard + Smartphone */}
+          <div className="relative lg:col-span-7">
+            <div className="rounded-2xl border border-[#292521] bg-[#111111] p-4 shadow-[0_32px_80px_-28px_rgba(0,0,0,0.95)] sm:p-5">
+              <div className="flex items-center justify-between border-b border-[#292521] pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#EF5350]/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#F2B968]/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#16C784]/80" />
+                </div>
+                <span className="text-[11px] font-medium text-[#A5A09A]">
+                  kortaz-app.vercel.app/app
+                </span>
+              </div>
+
+              <div className="mt-4 grid gap-4 sm:grid-cols-12">
+                {/* Mini sidebar */}
+                <div className="hidden rounded-xl border border-[#292521] bg-[#0C0C0C] p-3 sm:col-span-3 sm:block">
+                  <div className="text-xs font-extrabold tracking-wider text-[#F5F1EB]">
+                    KOR<span className="text-[#D99A4E]">TAZ</span>
+                  </div>
+                  <div className="mt-4 space-y-1.5 text-[11px]">
+                    <div className="rounded-lg bg-[#D99A4E]/15 px-2.5 py-1.5 font-semibold text-[#F2B968]">
+                      Início
+                    </div>
+                    <div className="px-2.5 py-1 text-[#A5A09A]">Agenda</div>
+                    <div className="px-2.5 py-1 text-[#A5A09A]">Agendamentos</div>
+                    <div className="px-2.5 py-1 text-[#A5A09A]">Clientes</div>
+                    <div className="px-2.5 py-1 text-[#A5A09A]">Financeiro</div>
+                    <div className="px-2.5 py-1 text-[#A5A09A]">Comissões</div>
+                  </div>
+                </div>
+
+                {/* Mini dashboard main */}
+                <div className="space-y-3 sm:col-span-9">
+                  <div className="grid grid-cols-3 gap-2.5">
+                    <div className="rounded-xl border border-[#292521] bg-[#151515] p-3">
+                      <p className="text-[10px] text-[#A5A09A]">Agendamentos hoje</p>
+                      <p className="mt-1 font-display text-lg font-bold text-[#F5F1EB]">24</p>
+                    </div>
+                    <div className="rounded-xl border border-[#292521] bg-[#151515] p-3">
+                      <p className="text-[10px] text-[#A5A09A]">Faturamento hoje</p>
+                      <p className="mt-1 font-display text-lg font-bold text-[#16C784]">
+                        {formatCurrencyBRL(3847.5)}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-[#292521] bg-[#151515] p-3">
+                      <p className="text-[10px] text-[#A5A09A]">Clientes</p>
+                      <p className="mt-1 font-display text-lg font-bold text-[#F2B968]">842</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-[#292521] bg-[#151515] p-3.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-[#F5F1EB]">Agenda de Hoje</span>
+                      <span className="text-[11px] font-medium text-[#D99A4E]">Tempo real</span>
+                    </div>
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center justify-between rounded-lg bg-[#1B1B1B] px-3 py-2 text-xs">
+                        <div>
+                          <p className="font-semibold text-[#F5F1EB]">09:00 · Matheus Ferreira</p>
+                          <p className="text-[10px] text-[#A5A09A]">Corte Degradê + Barba</p>
+                        </div>
+                        <span className="rounded-full bg-[#16C784]/15 px-2 py-0.5 text-[10px] font-semibold text-[#16C784]">
+                          Confirmado
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between rounded-lg bg-[#1B1B1B] px-3 py-2 text-xs">
+                        <div>
+                          <p className="font-semibold text-[#F5F1EB]">10:00 · Ana Souza</p>
+                          <p className="text-[10px] text-[#A5A09A]">Escova &amp; Hidratação</p>
+                        </div>
+                        <span className="rounded-full bg-[#4299E1]/15 px-2 py-0.5 text-[10px] font-semibold text-[#4299E1]">
+                          Em atendimento
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Smartphone floating preview */}
+            <div className="mt-4 rounded-2xl border border-[#D99A4E]/35 bg-[#151515] p-4 shadow-2xl sm:absolute sm:-bottom-6 sm:-right-4 sm:mt-0 sm:w-56">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#D99A4E]">
+                  Agendamento Mobile
+                </span>
+                <CalendarCheck2 className="h-3.5 w-3.5 text-[#16C784]" />
+              </div>
+              <p className="mt-2 font-display text-sm font-bold text-[#F5F1EB]">
+                Link exclusivo 24h
+              </p>
+              <p className="mt-1 text-[11px] text-[#A5A09A]">
+                Seu cliente escolhe serviço, profissional e horário em segundos.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-[#D49B6A]/15 py-8 text-xs text-[#B59E8D]">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <Users className="h-4 w-4 text-[#D49B6A]" />
-            <span>
-              &copy; {new Date().getFullYear()} Kortaz OS &mdash; Barbearias Masculinas &amp;
-              Salões de Beleza.
+      {/* 5.5 SEÇÃO DE FUNCIONALIDADES */}
+      <section id="recursos" className="border-b border-[#292521] bg-[#0C0C0C] py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D99A4E]">
+              RECURSOS DA PLATAFORMA
             </span>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-[#F5F1EB] sm:text-4xl">
+              Ferramentas reais para cada etapa do atendimento.
+            </h2>
           </div>
-          <div className="flex gap-6">
-            <Link href="/precos" className="hover:text-[#F7EFE6]">
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {FEATURES.map((feat) => (
+              <div
+                key={feat.title}
+                className="group rounded-2xl border border-[#292521] bg-[#151515] p-5 transition-all hover:-translate-y-0.5 hover:border-[#D99A4E]/50 hover:bg-[#1B1B1B]"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#292521] bg-[#090909] text-[#D99A4E] transition-colors group-hover:border-[#D99A4E]/40 group-hover:text-[#F2B968]">
+                  <feat.icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-base font-bold text-[#F5F1EB]">
+                  {feat.title}
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#A5A09A]">{feat.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5.6 SEÇÃO DE PLANOS */}
+      <section id="planos" className="border-b border-[#292521] py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D99A4E]">
+              PLANOS FLEXÍVEIS
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-[#F5F1EB] sm:text-4xl">
+              Planos que cabem no <span className="text-[#D99A4E]">seu negócio</span>.
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-[#A5A09A]">
+              Comece grátis e evolua conforme seu crescimento.
+            </p>
+          </div>
+
+          <PlansSectionClient
+            plans={plans}
+            featuresByPlan={Object.fromEntries(featuresByPlanId.entries())}
+          />
+        </div>
+      </section>
+
+      {/* 5.7 RESULTADOS REAIS / SOBRE */}
+      <section id="sobre" className="border-b border-[#292521] bg-[#0C0C0C] py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D99A4E]">
+                RESULTADOS &amp; CONFIABILIDADE
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-[#F5F1EB] sm:text-4xl">
+                Resultados reais, de quem usa.
+              </h2>
+            </div>
+            <Link
+              href="/s/barbearia-exclusiva"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-[#D99A4E] hover:text-[#F2B968]"
+            >
+              Explorar vitrine ao vivo
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          {realReviews.length > 0 ? (
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              {realReviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="rounded-2xl border border-[#292521] bg-[#151515] p-6"
+                >
+                  <div className="flex items-center gap-1 text-[#F2B968]">
+                    {Array.from({ length: review.rating }).map((_, idx) => (
+                      <Star key={idx} className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-[#F5F1EB]">
+                    &ldquo;{review.comment}&rdquo;
+                  </p>
+                  <div className="mt-5 border-t border-[#292521] pt-4">
+                    <p className="text-xs font-bold text-[#F5F1EB]">{review.author}</p>
+                    <p className="text-[11px] text-[#A5A09A]">{review.establishment}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              <div className="rounded-2xl border border-[#292521] bg-[#151515] p-6">
+                <ShieldCheck className="h-6 w-6 text-[#16C784]" />
+                <h3 className="mt-4 font-display text-lg font-bold text-[#F5F1EB]">
+                  Isolamento Multi-tenant + RLS
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-[#A5A09A]">
+                  Dados protegidos no PostgreSQL com Row Level Security em todas as tabelas e
+                  auditoria por estabelecimento.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-[#292521] bg-[#151515] p-6">
+                <CalendarCheck2 className="h-6 w-6 text-[#D99A4E]" />
+                <h3 className="mt-4 font-display text-lg font-bold text-[#F5F1EB]">
+                  Zero conflito de agenda
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-[#A5A09A]">
+                  Motor de disponibilidade com bloqueio de horários, duração real por serviço e
+                  confirmação imediata.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-[#292521] bg-[#151515] p-6">
+                <Coins className="h-6 w-6 text-[#F2B968]" />
+                <h3 className="mt-4 font-display text-lg font-bold text-[#F5F1EB]">
+                  Financeiro &amp; Comissões exatas
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-[#A5A09A]">
+                  Cálculo automático de comissões, controle de caixa e cobrança integrada com
+                  Mercado Pago.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 5.8 CTA FINAL */}
+      <section className="relative overflow-hidden border-b border-[#292521] py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-3xl border border-[#D99A4E]/30 bg-[#151515] p-8 sm:p-12">
+            <Image
+              src="/assets/gallery/kortaz2-marketing.jpg"
+              alt="Profissional atendendo cliente em barbearia moderna"
+              fill
+              sizes="(max-width: 1280px) 100vw, 1200px"
+              className="object-cover opacity-25"
+            />
+            <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+              <div className="max-w-2xl">
+                <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#F5F1EB] sm:text-4xl">
+                  Eleve sua barbearia ou salão com o Kortaz.
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#A5A09A] sm:text-base">
+                  Comece agora e experimente uma gestão mais simples, eficiente e lucrativa.
+                </p>
+              </div>
+              <Link
+                href="/cadastro"
+                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#D99A4E] px-6 py-4 text-sm font-bold text-[#090909] shadow-[0_12px_32px_-12px_rgba(217,154,78,0.55)] transition-colors hover:bg-[#F2B968]"
+              >
+                Criar minha conta grátis
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5.9 FOOTER */}
+      <footer className="bg-[#090909] py-12">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 sm:px-6 md:flex-row md:items-center lg:px-8">
+          <BrandLogo />
+          <nav className="flex flex-wrap items-center gap-6 text-xs font-medium text-[#A5A09A]">
+            <a href="#inicio" className="hover:text-[#F5F1EB]">
+              Início
+            </a>
+            <a href="#recursos" className="hover:text-[#F5F1EB]">
+              Recursos
+            </a>
+            <Link href="/precos" className="hover:text-[#F5F1EB]">
               Preços
             </Link>
-            <Link href="/termos" className="hover:text-[#F7EFE6]">
+            <a href="#sobre" className="hover:text-[#F5F1EB]">
+              Sobre
+            </a>
+            <Link href="/termos" className="hover:text-[#F5F1EB]">
               Termos
             </Link>
-            <Link href="/privacidade" className="hover:text-[#F7EFE6]">
-              Privacidade &amp; LGPD
+            <Link href="/privacidade" className="hover:text-[#F5F1EB]">
+              Privacidade
             </Link>
-            <Link href="/admin" className="text-[#D49B6A] hover:underline">
-              Super Admin
-            </Link>
-          </div>
+          </nav>
+        </div>
+        <div className="mx-auto mt-8 max-w-7xl border-t border-[#292521] px-4 pt-6 text-xs text-[#A5A09A] sm:px-6 lg:px-8">
+          © {new Date().getFullYear()} Kortaz. Todos os direitos reservados.
         </div>
       </footer>
     </div>

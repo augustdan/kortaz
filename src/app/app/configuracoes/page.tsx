@@ -90,8 +90,8 @@ export default function SettingsPage() {
     <PermissionGuard resource="settings">
       <div className="space-y-6">
         <div>
-          <h1 className="font-serif text-3xl font-semibold">Configurações, Multiunidades & RBAC</h1>
-          <p className="text-xs text-[#B59E8D]">
+          <h1 className="font-display text-3xl font-semibold">Configurações, Multiunidades & RBAC</h1>
+          <p className="text-xs text-[#A5A09A]">
             Personalização da página pública, cadastro de filiais e permissões granulares por cargo.
           </p>
         </div>
@@ -99,66 +99,66 @@ export default function SettingsPage() {
         {/* Dados Gerais */}
         <form
           onSubmit={handleSaveSettings}
-          className="rounded-xl border border-white/10 bg-[#18100C] p-5 space-y-4 text-xs"
+          className="rounded-xl border border-[#292521] bg-[#151515] p-5 space-y-4 text-xs"
         >
-          <h2 className="text-sm font-semibold text-[#F7EFE6]">Identidade & Políticas</h2>
+          <h2 className="text-sm font-semibold text-[#F5F1EB]">Identidade & Políticas</h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Nome da Barbearia</label>
+              <label className="mb-1 block text-[#A5A09A]">Nome da Barbearia</label>
               <input
                 type="text"
                 defaultValue={data.tenant.name}
                 onChange={(e) => setBarbershopName(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Título do Banner Público</label>
+              <label className="mb-1 block text-[#A5A09A]">Título do Banner Público</label>
               <input
                 type="text"
                 defaultValue={data.settings.custom_public_headline}
                 onChange={(e) => setHeadline(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Antecedência mínima p/ cancelar (h)</label>
+              <label className="mb-1 block text-[#A5A09A]">Antecedência mínima p/ cancelar (h)</label>
               <input
                 type="number"
                 min={0}
                 defaultValue={data.settings.cancellation_policy_hours}
                 onChange={(e) => setCancelHours(Number(e.target.value))}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2"
               />
             </div>
           </div>
           <div className="flex items-center gap-3">
             <button
               type="submit"
-              className="rounded-lg bg-[#D49B6A] px-5 py-2 font-bold text-[#0E0906]"
+              className="rounded-lg bg-[#D99A4E] px-5 py-2 font-bold text-[#090909]"
             >
               Salvar Preferências
             </button>
-            {feedback && <span className="text-[#45C486]">{feedback}</span>}
+            {feedback && <span className="text-[#16C784]">{feedback}</span>}
           </div>
         </form>
 
         {/* Gestão de Unidades / Filiais */}
-        <div className="rounded-xl border border-white/10 bg-[#18100C] p-5 space-y-4">
+        <div className="rounded-xl border border-[#292521] bg-[#151515] p-5 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="flex items-center gap-2 text-sm font-semibold">
-              <Building2 className="h-4 w-4 text-[#D49B6A]" />
+              <Building2 className="h-4 w-4 text-[#D99A4E]" />
               <span>Unidades / Filiais ({data.branches.length}/{data.plan.max_branches})</span>
             </h2>
           </div>
 
           <div className="grid gap-3 md:grid-cols-2">
             {data.branches.map((b) => (
-              <div key={b.id} className="rounded-lg border border-white/10 bg-[#0E0906] p-3 text-xs">
-                <p className="font-bold text-[#F7EFE6]">
-                  {b.name} {b.is_headquarters && <span className="text-[#D49B6A]">(Matriz)</span>}
+              <div key={b.id} className="rounded-lg border border-[#292521] bg-[#090909] p-3 text-xs">
+                <p className="font-bold text-[#F5F1EB]">
+                  {b.name} {b.is_headquarters && <span className="text-[#D99A4E]">(Matriz)</span>}
                 </p>
-                <p className="text-[#B59E8D]">
+                <p className="text-[#A5A09A]">
                   {b.address} — {b.city}/{b.state} &bull; {b.phone}
                 </p>
               </div>
@@ -172,7 +172,7 @@ export default function SettingsPage() {
               placeholder="Nome da filial"
               value={branchName}
               onChange={(e) => setBranchName(e.target.value)}
-              className="rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="rounded border border-[#292521] bg-[#090909] px-3 py-2"
             />
             <input
               type="text"
@@ -180,7 +180,7 @@ export default function SettingsPage() {
               placeholder="Endereço"
               value={branchAddress}
               onChange={(e) => setBranchAddress(e.target.value)}
-              className="rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="rounded border border-[#292521] bg-[#090909] px-3 py-2"
             />
             <input
               type="text"
@@ -188,7 +188,7 @@ export default function SettingsPage() {
               placeholder="Cidade"
               value={branchCity}
               onChange={(e) => setBranchCity(e.target.value)}
-              className="rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="rounded border border-[#292521] bg-[#090909] px-3 py-2"
             />
             <input
               type="text"
@@ -197,7 +197,7 @@ export default function SettingsPage() {
               placeholder="UF"
               value={branchState}
               onChange={(e) => setBranchState(e.target.value.toUpperCase())}
-              className="rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="rounded border border-[#292521] bg-[#090909] px-3 py-2"
             />
             <input
               type="tel"
@@ -205,22 +205,22 @@ export default function SettingsPage() {
               placeholder="Telefone"
               value={branchPhone}
               onChange={(e) => setBranchPhone(e.target.value)}
-              className="rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+              className="rounded border border-[#292521] bg-[#090909] px-3 py-2"
             />
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-1 rounded bg-[#D49B6A] font-bold text-[#0E0906]"
+              className="inline-flex items-center justify-center gap-1 rounded bg-[#D99A4E] font-bold text-[#090909]"
             >
               <Plus className="h-3.5 w-3.5" /> Nova Filial
             </button>
           </form>
 
           {branchError && (
-            <div className="flex items-center justify-between rounded border border-[#E06258]/40 bg-[#E06258]/10 p-3 text-xs text-[#E06258]">
+            <div className="flex items-center justify-between rounded border border-[#EF5350]/40 bg-[#EF5350]/10 p-3 text-xs text-[#EF5350]">
               <span>{branchError}</span>
               <Link
                 href="/app/assinatura"
-                className="rounded bg-[#D49B6A] px-3 py-1 font-bold text-[#0E0906]"
+                className="rounded bg-[#D99A4E] px-3 py-1 font-bold text-[#090909]"
               >
                 Ver Planos
               </Link>
@@ -229,9 +229,9 @@ export default function SettingsPage() {
         </div>
 
         {/* Status Real das Credenciais de Integração */}
-        <div className="rounded-xl border border-white/10 bg-[#18100C] p-5 space-y-3 text-xs">
+        <div className="rounded-xl border border-[#292521] bg-[#151515] p-5 space-y-3 text-xs">
           <h2 className="flex items-center gap-2 text-sm font-semibold">
-            <Key className="h-4 w-4 text-[#D49B6A]" /> Integrações Externas (Variáveis de Ambiente)
+            <Key className="h-4 w-4 text-[#D99A4E]" /> Integrações Externas (Variáveis de Ambiente)
           </h2>
           <div className="grid gap-3 sm:grid-cols-3">
             {[
@@ -251,32 +251,32 @@ export default function SettingsPage() {
                 vars: 'RESEND_API_KEY, RESEND_FROM_EMAIL',
               },
             ].map((int) => (
-              <div key={int.name} className="rounded-lg border border-white/10 bg-[#0E0906] p-3">
+              <div key={int.name} className="rounded-lg border border-[#292521] bg-[#090909] p-3">
                 <div className="flex items-center justify-between">
-                  <strong className="text-[#F7EFE6]">{int.name}</strong>
+                  <strong className="text-[#F5F1EB]">{int.name}</strong>
                   <span
                     className={`rounded px-2 py-0.5 text-[10px] font-bold ${
                       int.ok
-                        ? 'bg-[#45C486]/15 text-[#45C486]'
-                        : 'bg-[#D49B6A]/15 text-[#D49B6A]'
+                        ? 'bg-[#16C784]/15 text-[#16C784]'
+                        : 'bg-[#D99A4E]/15 text-[#D99A4E]'
                     }`}
                   >
                     {int.ok ? 'Configurado' : 'Aguardando .env'}
                   </span>
                 </div>
-                <p className="mt-1.5 font-mono text-[10px] text-[#B59E8D]">{int.vars}</p>
+                <p className="mt-1.5 font-mono text-[10px] text-[#A5A09A]">{int.vars}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Matriz Configurável de Permissões RBAC */}
-        <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#18100C] p-5">
+        <div className="overflow-x-auto rounded-xl border border-[#292521] bg-[#151515] p-5">
           <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold">
-            <Shield className="h-4 w-4 text-[#D49B6A]" /> Matriz de Permissões Configurável (RBAC)
+            <Shield className="h-4 w-4 text-[#D99A4E]" /> Matriz de Permissões Configurável (RBAC)
           </h2>
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-white/10 text-[#B59E8D]">
+            <thead className="border-b border-[#292521] text-[#A5A09A]">
               <tr>
                 <th className="py-2 pr-4">Perfil</th>
                 <th className="py-2 pr-4">Módulo</th>
@@ -291,14 +291,14 @@ export default function SettingsPage() {
                 const role = data.roles.find((r) => r.id === perm.role_id);
                 return (
                   <tr key={perm.id}>
-                    <td className="py-2 pr-4 font-semibold text-[#D49B6A]">{role?.name}</td>
+                    <td className="py-2 pr-4 font-semibold text-[#D99A4E]">{role?.name}</td>
                     <td className="py-2 pr-4 capitalize">{perm.resource}</td>
                     <td className="py-2 text-center">
                       <input
                         type="checkbox"
                         checked={perm.can_view}
                         onChange={(e) => togglePermission(perm.id, 'canView', e.target.checked)}
-                        className="accent-[#D49B6A]"
+                        className="accent-[#D99A4E]"
                       />
                     </td>
                     <td className="py-2 text-center">
@@ -306,7 +306,7 @@ export default function SettingsPage() {
                         type="checkbox"
                         checked={perm.can_create}
                         onChange={(e) => togglePermission(perm.id, 'canCreate', e.target.checked)}
-                        className="accent-[#D49B6A]"
+                        className="accent-[#D99A4E]"
                       />
                     </td>
                     <td className="py-2 text-center">
@@ -314,7 +314,7 @@ export default function SettingsPage() {
                         type="checkbox"
                         checked={perm.can_edit}
                         onChange={(e) => togglePermission(perm.id, 'canEdit', e.target.checked)}
-                        className="accent-[#D49B6A]"
+                        className="accent-[#D99A4E]"
                       />
                     </td>
                     <td className="py-2 text-center">
@@ -322,7 +322,7 @@ export default function SettingsPage() {
                         type="checkbox"
                         checked={perm.can_delete}
                         onChange={(e) => togglePermission(perm.id, 'canDelete', e.target.checked)}
-                        className="accent-[#D49B6A]"
+                        className="accent-[#D99A4E]"
                       />
                     </td>
                   </tr>

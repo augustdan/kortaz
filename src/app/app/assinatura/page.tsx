@@ -42,26 +42,26 @@ export default function TenantSubscriptionPage() {
     <PermissionGuard resource="subscription">
       <div className="space-y-6">
         <div>
-          <h1 className="font-serif text-3xl font-semibold">Assinatura & Limites do Plano</h1>
-          <p className="text-xs text-[#B59E8D]">
+          <h1 className="font-display text-3xl font-semibold">Assinatura & Limites do Plano</h1>
+          <p className="text-xs text-[#A5A09A]">
             Acompanhe o consumo em tempo real e faça upgrade ou downgrade com total transparência.
           </p>
         </div>
 
         {/* Status Atual */}
-        <div className="rounded-2xl border border-[#D49B6A]/40 bg-[#18100C] p-6">
+        <div className="rounded-2xl border border-[#D99A4E]/40 bg-[#151515] p-6">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#D49B6A]">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#D99A4E]">
                 PLANO ATUAL
               </span>
-              <h2 className="mt-1 font-serif text-3xl font-semibold">
+              <h2 className="mt-1 font-display text-3xl font-semibold">
                 {data.plan.name}{' '}
-                <span className="text-base font-normal text-[#45C486]">
+                <span className="text-base font-normal text-[#16C784]">
                   ({data.subscription.status})
                 </span>
               </h2>
-              <p className="mt-1 text-xs text-[#B59E8D]">
+              <p className="mt-1 text-xs text-[#A5A09A]">
                 Renovação em {formatDateBR(data.subscription.current_period_end)} &bull; Valor:{' '}
                 {data.plan.is_custom_pricing
                   ? 'Sob consulta'
@@ -78,27 +78,27 @@ export default function TenantSubscriptionPage() {
                 placeholder="Cupom SaaS (ex: BARBEROS20)"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                className="rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2 text-xs uppercase"
+                className="rounded-lg border border-[#292521] bg-[#090909] px-3 py-2 text-xs uppercase"
               />
             </div>
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3 text-xs">
-            <div className="rounded-xl bg-[#0E0906] p-4">
-              <p className="text-[#B59E8D]">Profissionais ativos</p>
-              <p className="mt-1 text-lg font-bold text-[#F7EFE6]">
+            <div className="rounded-xl bg-[#090909] p-4">
+              <p className="text-[#A5A09A]">Profissionais ativos</p>
+              <p className="mt-1 text-lg font-bold text-[#F5F1EB]">
                 {activeBarbers} / {data.plan.max_barbers ?? 'Ilimitados'}
               </p>
             </div>
-            <div className="rounded-xl bg-[#0E0906] p-4">
-              <p className="text-[#B59E8D]">Agendamentos no mês</p>
-              <p className="mt-1 text-lg font-bold text-[#F7EFE6]">
+            <div className="rounded-xl bg-[#090909] p-4">
+              <p className="text-[#A5A09A]">Agendamentos no mês</p>
+              <p className="mt-1 text-lg font-bold text-[#F5F1EB]">
                 {monthAppointments} / {data.plan.max_monthly_appointments ?? 'Ilimitados'}
               </p>
             </div>
-            <div className="rounded-xl bg-[#0E0906] p-4">
-              <p className="text-[#B59E8D]">Unidades / Filiais</p>
-              <p className="mt-1 text-lg font-bold text-[#F7EFE6]">
+            <div className="rounded-xl bg-[#090909] p-4">
+              <p className="text-[#A5A09A]">Unidades / Filiais</p>
+              <p className="mt-1 text-lg font-bold text-[#F5F1EB]">
                 {activeBranches} / {data.plan.max_branches >= 999 ? 'Ilimitadas' : data.plan.max_branches}
               </p>
             </div>
@@ -106,7 +106,7 @@ export default function TenantSubscriptionPage() {
         </div>
 
         {feedback && (
-          <div className="rounded-lg border border-[#45C486]/40 bg-[#45C486]/10 p-3 text-xs text-[#45C486]">
+          <div className="rounded-lg border border-[#16C784]/40 bg-[#16C784]/10 p-3 text-xs text-[#16C784]">
             {feedback}
           </div>
         )}
@@ -119,28 +119,28 @@ export default function TenantSubscriptionPage() {
               <div
                 key={plan.id}
                 className={`flex flex-col justify-between rounded-xl border p-5 ${
-                  isCurrent ? 'border-[#D49B6A] bg-[#241710]' : 'border-white/10 bg-[#18100C]'
+                  isCurrent ? 'border-[#D99A4E] bg-[#1B1B1B]' : 'border-[#292521] bg-[#151515]'
                 }`}
               >
                 <div>
                   <h3 className="text-base font-bold">{plan.name}</h3>
-                  <p className="mt-1 text-xl font-bold text-[#D49B6A]">
+                  <p className="mt-1 text-xl font-bold text-[#D99A4E]">
                     {plan.is_custom_pricing
                       ? 'Sob consulta'
                       : formatCurrencyBRL(plan.price_monthly) + '/mês'}
                   </p>
-                  <p className="mt-2 text-xs text-[#B59E8D]">{plan.tagline}</p>
+                  <p className="mt-2 text-xs text-[#A5A09A]">{plan.tagline}</p>
                   <ul className="mt-3 space-y-1 text-xs">
                     <li className="flex items-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#45C486]" />
+                      <Check className="h-3.5 w-3.5 text-[#16C784]" />
                       {plan.max_barbers ?? 'Ilimitados'} profissionais
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#45C486]" />
+                      <Check className="h-3.5 w-3.5 text-[#16C784]" />
                       {plan.max_monthly_appointments ?? 'Ilimitados'} agendamentos/mês
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#45C486]" />
+                      <Check className="h-3.5 w-3.5 text-[#16C784]" />
                       Até {plan.max_branches >= 999 ? 'ilimitadas' : plan.max_branches} unidade(s)
                     </li>
                   </ul>
@@ -152,8 +152,8 @@ export default function TenantSubscriptionPage() {
                   onClick={() => handleChangePlan(plan.code)}
                   className={`mt-5 flex items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-bold ${
                     isCurrent
-                      ? 'bg-white/10 text-[#B59E8D] cursor-default'
-                      : 'bg-[#D49B6A] text-[#0E0906] hover:bg-[#E5B386]'
+                      ? 'bg-white/10 text-[#A5A09A] cursor-default'
+                      : 'bg-[#D99A4E] text-[#090909] hover:bg-[#F2B968]'
                   }`}
                 >
                   <CreditCard className="h-3.5 w-3.5" />
@@ -164,8 +164,8 @@ export default function TenantSubscriptionPage() {
           })}
         </div>
 
-        <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#18100C] p-4 text-xs text-[#B59E8D]">
-          <ShieldCheck className="h-4 w-4 text-[#45C486]" />
+        <div className="flex items-center gap-2 rounded-xl border border-[#292521] bg-[#151515] p-4 text-xs text-[#A5A09A]">
+          <ShieldCheck className="h-4 w-4 text-[#16C784]" />
           <span>
             Mudanças de plano preservam integralmente clientes, histórico financeiro e configurações.
           </span>

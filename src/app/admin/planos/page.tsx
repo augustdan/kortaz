@@ -42,14 +42,14 @@ export default function AdminPlansPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-serif text-3xl font-semibold">Gestor Dinâmico de Planos & Limites</h1>
-        <p className="text-xs text-[#B59E8D]">
+        <h1 className="font-display text-3xl font-semibold">Gestor Dinâmico de Planos & Limites</h1>
+        <p className="text-xs text-[#A5A09A]">
           Altere preços, tetos de profissionais, agendamentos e unidades sem modificar código.
         </p>
       </div>
 
       {msg && (
-        <div className="rounded-lg border border-[#45C486]/40 bg-[#45C486]/10 p-3 text-xs text-[#45C486]">
+        <div className="rounded-lg border border-[#16C784]/40 bg-[#16C784]/10 p-3 text-xs text-[#16C784]">
           {msg}
         </div>
       )}
@@ -60,13 +60,13 @@ export default function AdminPlansPage() {
           return (
             <div
               key={plan.id}
-              className="rounded-xl border border-white/10 bg-[#18100C] p-5 space-y-3 text-xs"
+              className="rounded-xl border border-[#292521] bg-[#151515] p-5 space-y-3 text-xs"
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#D49B6A]">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#D99A4E]">
                 {plan.code}
               </p>
               <div>
-                <label className="mb-1 block text-[#B59E8D]">Nome do Plano</label>
+                <label className="mb-1 block text-[#A5A09A]">Nome do Plano</label>
                 <input
                   type="text"
                   defaultValue={plan.name}
@@ -76,12 +76,12 @@ export default function AdminPlansPage() {
                       [plan.id]: { ...prev[plan.id], name: e.target.value },
                     }))
                   }
-                  className="w-full rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+                  className="w-full rounded border border-[#292521] bg-[#090909] px-3 py-2"
                 />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="mb-1 block text-[#B59E8D]">Preço Mensal (R$)</label>
+                  <label className="mb-1 block text-[#A5A09A]">Preço Mensal (R$)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -95,11 +95,11 @@ export default function AdminPlansPage() {
                         },
                       }))
                     }
-                    className="w-full rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+                    className="w-full rounded border border-[#292521] bg-[#090909] px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-[#B59E8D]">Máx. Unidades</label>
+                  <label className="mb-1 block text-[#A5A09A]">Máx. Unidades</label>
                   <input
                     type="number"
                     defaultValue={plan.max_branches}
@@ -112,13 +112,13 @@ export default function AdminPlansPage() {
                         },
                       }))
                     }
-                    className="w-full rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+                    className="w-full rounded border border-[#292521] bg-[#090909] px-3 py-2"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="mb-1 block text-[#B59E8D]">Máx. Barbeiros (vazio=∞)</label>
+                  <label className="mb-1 block text-[#A5A09A]">Máx. Barbeiros (vazio=∞)</label>
                   <input
                     type="number"
                     defaultValue={plan.max_barbers ?? ''}
@@ -131,11 +131,11 @@ export default function AdminPlansPage() {
                         },
                       }))
                     }
-                    className="w-full rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+                    className="w-full rounded border border-[#292521] bg-[#090909] px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-[#B59E8D]">Máx. Agend./mês (vazio=∞)</label>
+                  <label className="mb-1 block text-[#A5A09A]">Máx. Agend./mês (vazio=∞)</label>
                   <input
                     type="number"
                     defaultValue={plan.max_monthly_appointments ?? ''}
@@ -150,7 +150,7 @@ export default function AdminPlansPage() {
                         },
                       }))
                     }
-                    className="w-full rounded border border-white/10 bg-[#0E0906] px-3 py-2"
+                    className="w-full rounded border border-[#292521] bg-[#090909] px-3 py-2"
                   />
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function AdminPlansPage() {
               <button
                 type="button"
                 onClick={() => savePlan(plan)}
-                className="w-full rounded-lg bg-[#D49B6A] py-2 font-bold text-[#0E0906]"
+                className="w-full rounded-lg bg-[#D99A4E] py-2 font-bold text-[#090909]"
               >
                 Salvar Alterações ({patch.price_monthly ?? plan.price_monthly})
               </button>

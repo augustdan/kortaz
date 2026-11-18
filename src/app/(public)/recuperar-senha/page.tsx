@@ -51,29 +51,29 @@ export default function PasswordResetPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-[#0E0906] px-4 py-12 text-[#F7EFE6]">
-      <div className="mx-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#18100C] p-8">
+    <div className="flex min-h-screen flex-col justify-center bg-[#090909] px-4 py-12 text-[#F5F1EB]">
+      <div className="mx-auto w-full max-w-md rounded-2xl border border-[#292521] bg-[#151515] p-8">
         <div className="mb-6 flex justify-center">
           <BrandLogo />
         </div>
-        <h1 className="text-center font-serif text-3xl font-semibold">Recuperar Senha</h1>
+        <h1 className="text-center font-display text-3xl font-semibold">Recuperar Senha</h1>
 
         {step === 'request' && (
           <form onSubmit={handleRequest} className="mt-6 space-y-4 text-xs">
             <div>
-              <label className="mb-1 block text-[#B59E8D]">E-mail cadastrado</label>
+              <label className="mb-1 block text-[#A5A09A]">E-mail cadastrado</label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm"
               />
             </div>
-            {error && <p className="text-[#E06258]">{error}</p>}
+            {error && <p className="text-[#EF5350]">{error}</p>}
             <button
               type="submit"
-              className="w-full rounded-lg bg-[#D49B6A] py-3 font-bold uppercase text-[#0E0906]"
+              className="w-full rounded-lg bg-[#D99A4E] py-3 font-bold uppercase text-[#090909]"
             >
               Solicitar Redefinição
             </button>
@@ -83,35 +83,35 @@ export default function PasswordResetPage() {
         {step === 'confirm' && (
           <form onSubmit={handleConfirm} className="mt-6 space-y-4 text-xs">
             {message && (
-              <div className="rounded-lg border border-[#D49B6A]/30 bg-[#0E0906] p-3 break-all text-[#D49B6A]">
+              <div className="rounded-lg border border-[#D99A4E]/30 bg-[#090909] p-3 break-all text-[#D99A4E]">
                 {message}
               </div>
             )}
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Token de verificação</label>
+              <label className="mb-1 block text-[#A5A09A]">Token de verificação</label>
               <input
                 type="text"
                 required
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm"
               />
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Nova senha</label>
+              <label className="mb-1 block text-[#A5A09A]">Nova senha</label>
               <input
                 type="password"
                 required
                 minLength={6}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm"
+                className="w-full rounded-lg border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm"
               />
             </div>
-            {error && <p className="text-[#E06258]">{error}</p>}
+            {error && <p className="text-[#EF5350]">{error}</p>}
             <button
               type="submit"
-              className="w-full rounded-lg bg-[#D49B6A] py-3 font-bold uppercase text-[#0E0906]"
+              className="w-full rounded-lg bg-[#D99A4E] py-3 font-bold uppercase text-[#090909]"
             >
               Salvar Nova Senha
             </button>
@@ -120,10 +120,10 @@ export default function PasswordResetPage() {
 
         {step === 'done' && (
           <div className="mt-6 space-y-4 text-center text-sm">
-            <p className="text-[#45C486]">Senha alterada com sucesso!</p>
+            <p className="text-[#16C784]">Senha alterada com sucesso!</p>
             <Link
               href="/login"
-              className="block rounded-lg bg-[#D49B6A] py-2.5 text-xs font-bold uppercase text-[#0E0906]"
+              className="block rounded-lg bg-[#D99A4E] py-2.5 text-xs font-bold uppercase text-[#090909]"
             >
               Ir para Login
             </Link>

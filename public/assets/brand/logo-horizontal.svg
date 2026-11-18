@@ -1,11 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" fill="none">
-  <g stroke="#D49B6A" stroke-width="2.6" stroke-linecap="round">
-    <path d="M36 14V54"/>
-    <path d="M16 34H56"/>
-    <path d="M22 20L50 48"/>
-    <path d="M50 20L22 48"/>
-    <circle cx="36" cy="34" r="3.5" fill="#0E0906" stroke="#F7EFE6" stroke-width="1.8"/>
-  </g>
-  <text x="72" y="32" fill="#D49B6A" font-family="sans-serif" font-size="10" letter-spacing="4" font-weight="600">BARBEARIA &amp; SALÃO OS</text>
-  <text x="72" y="56" fill="#F7EFE6" font-family="Georgia, serif" font-size="28" letter-spacing="4" font-weight="600">KORTAZ</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <rect x="2" y="8" width="48" height="48" rx="12" fill="#151515" stroke="#292521" stroke-width="2" />
+  <path d="M16 20V44" stroke="#D99A4E" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M36 20L21 32L37 44" stroke="#F2B968" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="66" y="41" fill="#F5F1EB" font-family="Manrope, Inter, system-ui, sans-serif" font-size="26" font-weight="800" letter-spacing="4">KORTAZ</text>
 </svg>

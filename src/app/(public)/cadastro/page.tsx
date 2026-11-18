@@ -71,22 +71,22 @@ export default function RegisterTenantPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0E0906] px-4 py-12 text-[#F7EFE6]">
+    <div className="min-h-screen bg-[#090909] px-4 py-12 text-[#F5F1EB]">
       <div className="hud-radial-glow pointer-events-none fixed inset-0" />
       <div className="hud-panel relative mx-auto max-w-xl rounded-3xl p-8">
         <div className="mb-6 flex justify-center">
           <BrandLogo />
         </div>
-        <h1 className="text-center font-serif text-3xl font-semibold">
+        <h1 className="text-center font-display text-3xl font-semibold">
           Cadastre sua Barbearia ou Salão
         </h1>
-        <p className="mt-1 text-center text-xs text-[#B59E8D]">
+        <p className="mt-1 text-center text-xs text-[#A5A09A]">
           Ambiente multi-tenant isolado pronto para barbearias masculinas, cabeleireiras e salões.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4 text-xs">
           <div>
-            <label className="mb-1.5 block text-[#B59E8D]">Segmento do Estabelecimento</label>
+            <label className="mb-1.5 block text-[#A5A09A]">Segmento do Estabelecimento</label>
             <div className="grid grid-cols-3 gap-2">
               {[
                 { key: 'barbershop', label: 'Barbearia Masculina' },
@@ -99,8 +99,8 @@ export default function RegisterTenantPage() {
                   onClick={() => setBusinessType(opt.key as 'barbershop' | 'salon' | 'unisex')}
                   className={`rounded-xl border py-2.5 text-[11px] font-semibold transition-all ${
                     businessType === opt.key
-                      ? 'border-[#D49B6A] bg-[#D49B6A] text-[#0E0906]'
-                      : 'border-white/10 bg-[#18100C] text-[#B59E8D]'
+                      ? 'border-[#D99A4E] bg-[#D99A4E] text-[#090909]'
+                      : 'border-[#292521] bg-[#151515] text-[#A5A09A]'
                   }`}
                 >
                   {opt.label}
@@ -111,124 +111,124 @@ export default function RegisterTenantPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Seu Nome Completo</label>
+              <label className="mb-1 block text-[#A5A09A]">Seu Nome Completo</label>
               <input
                 type="text"
                 required
                 value={ownerName}
                 onChange={(e) => setOwnerName(e.target.value)}
                 placeholder="Ex: Camila ou João Pedro"
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">WhatsApp / Telefone</label>
+              <label className="mb-1 block text-[#A5A09A]">WhatsApp / Telefone</label>
               <input
                 type="tel"
                 required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="(11) 99999-9999"
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-[#B59E8D]">E-mail de Acesso</label>
+              <label className="mb-1 block text-[#A5A09A]">E-mail de Acesso</label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="contato@seustudio.com.br"
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Senha (mín. 6 caracteres)</label>
+              <label className="mb-1 block text-[#A5A09A]">Senha (mín. 6 caracteres)</label>
               <input
                 type="password"
                 required
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Nome do Espaço</label>
+              <label className="mb-1 block text-[#A5A09A]">Nome do Espaço</label>
               <input
                 type="text"
                 required
                 value={barbershopName}
                 onChange={(e) => handleNameChange(e.target.value)}
                 placeholder="Ex: Studio Kortaz"
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-[#B59E8D]">Link Público (/s/slug)</label>
+              <label className="mb-1 block text-[#A5A09A]">Link Público (/s/slug)</label>
               <input
                 type="text"
                 required
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
                 placeholder="studio-kortaz"
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-[#B59E8D]">Endereço da Matriz</label>
+              <label className="mb-1 block text-[#A5A09A]">Endereço da Matriz</label>
               <input
                 type="text"
                 required
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Rua Augusta, 500"
-                className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
               />
             </div>
             <div className="grid grid-cols-3 gap-2">
               <div className="col-span-2">
-                <label className="mb-1 block text-[#B59E8D]">Cidade</label>
+                <label className="mb-1 block text-[#A5A09A]">Cidade</label>
                 <input
                   type="text"
                   required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-2.5 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+                  className="w-full rounded-xl border border-[#292521] bg-[#090909] px-2.5 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[#B59E8D]">UF</label>
+                <label className="mb-1 block text-[#A5A09A]">UF</label>
                 <input
                   type="text"
                   required
                   maxLength={2}
                   value={state}
                   onChange={(e) => setState(e.target.value.toUpperCase())}
-                  className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-2 py-2.5 text-center text-sm focus:border-[#D49B6A] focus:outline-none"
+                  className="w-full rounded-xl border border-[#292521] bg-[#090909] px-2 py-2.5 text-center text-sm focus:border-[#D99A4E] focus:outline-none"
                 />
               </div>
             </div>
           </div>
 
           <div>
-            <label className="mb-1 block text-[#B59E8D]">Plano Inicial</label>
+            <label className="mb-1 block text-[#A5A09A]">Plano Inicial</label>
             <select
               value={planCode}
               onChange={(e) =>
                 setPlanCode(e.target.value as 'free' | 'starter' | 'pro' | 'premium' | 'business')
               }
-              className="w-full rounded-xl border border-white/10 bg-[#0E0906] px-3 py-2.5 text-sm focus:border-[#D49B6A] focus:outline-none"
+              className="w-full rounded-xl border border-[#292521] bg-[#090909] px-3 py-2.5 text-sm focus:border-[#D99A4E] focus:outline-none"
             >
               <option value="free">Plano Gratuito — R$ 0/mês (1 profissional, 30 agendamentos/mês)</option>
               <option value="starter">Plano Starter — R$ 29,90/mês (14 dias grátis)</option>
@@ -239,7 +239,7 @@ export default function RegisterTenantPage() {
           </div>
 
           {error && (
-            <div className="flex items-start gap-2 rounded-xl border border-[#E06258]/40 bg-[#E06258]/10 p-3 text-xs text-[#E06258]">
+            <div className="flex items-start gap-2 rounded-xl border border-[#EF5350]/40 bg-[#EF5350]/10 p-3 text-xs text-[#EF5350]">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -248,15 +248,15 @@ export default function RegisterTenantPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-[#D49B6A] py-3.5 text-xs font-bold uppercase tracking-wider text-[#0E0906] hover:bg-[#E5B386] disabled:opacity-50"
+            className="w-full rounded-full bg-[#D99A4E] py-3.5 text-xs font-bold uppercase tracking-wider text-[#090909] hover:bg-[#F2B968] disabled:opacity-50"
           >
             {loading ? 'Provisionando Ambiente...' : 'Criar Meu Espaço na Kortaz'}
           </button>
         </form>
 
-        <p className="mt-5 text-center text-xs text-[#B59E8D]">
+        <p className="mt-5 text-center text-xs text-[#A5A09A]">
           Já possui conta?{' '}
-          <Link href="/login" className="text-[#D49B6A] hover:underline">
+          <Link href="/login" className="text-[#D99A4E] hover:underline">
             Fazer login
           </Link>
         </p>

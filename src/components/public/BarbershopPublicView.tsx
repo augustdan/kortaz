@@ -439,39 +439,39 @@ export function BarbershopPublicView({
   const visibleBarbers = showAllBarbers ? branchBarbers : branchBarbers.slice(0, 5);
 
   return (
-    <div className="min-h-screen bg-[#0E0906] text-[#F7EFE6]">
+    <div className="min-h-screen bg-[#090909] text-[#F5F1EB]">
       {/* TOP NAVIGATION */}
-      <header className="sticky top-0 z-40 border-b border-[#D49B6A]/15 bg-[#0E0906]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-[#D99A4E]/15 bg-[#090909]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <Link href={`/s/${tenant.slug}`} className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#D49B6A]/35 bg-[#18100C]">
-              <Scissors className="h-5 w-5 text-[#D49B6A]" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#D99A4E]/35 bg-[#151515]">
+              <Scissors className="h-5 w-5 text-[#D99A4E]" />
             </div>
             <div className="leading-none">
-              <span className="block text-[9px] font-semibold uppercase tracking-[0.26em] text-[#D49B6A]">
+              <span className="block text-[9px] font-semibold uppercase tracking-[0.26em] text-[#D99A4E]">
                 BARBEARIA &amp; SALÃO
               </span>
-              <span className="font-serif text-lg font-semibold tracking-wider text-[#F7EFE6] uppercase">
+              <span className="font-display text-lg font-semibold tracking-wider text-[#F5F1EB] uppercase">
                 {tenant.name}
               </span>
             </div>
           </Link>
 
           {!bookingOnlyMode && (
-            <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.18em] text-[#B59E8D] md:flex">
-              <a href="#inicio" className="hover:text-[#D49B6A]">
+            <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.18em] text-[#A5A09A] md:flex">
+              <a href="#inicio" className="hover:text-[#D99A4E]">
                 INÍCIO
               </a>
-              <a href="#agendar" className="hover:text-[#D49B6A]">
+              <a href="#agendar" className="hover:text-[#D99A4E]">
                 SERVIÇOS
               </a>
-              <a href="#agendar" className="hover:text-[#D49B6A]">
+              <a href="#agendar" className="hover:text-[#D99A4E]">
                 ESPECIALISTAS
               </a>
-              <a href="#galeria" className="hover:text-[#D49B6A]">
+              <a href="#galeria" className="hover:text-[#D99A4E]">
                 GALERIA
               </a>
-              <a href="#contato" className="hover:text-[#D49B6A]">
+              <a href="#contato" className="hover:text-[#D99A4E]">
                 CONTATO
               </a>
             </nav>
@@ -480,7 +480,7 @@ export function BarbershopPublicView({
           <div className="flex items-center gap-3">
             <Link
               href="/login"
-              className="hidden text-xs font-medium text-[#B59E8D] hover:text-[#F7EFE6] sm:inline-block"
+              className="hidden text-xs font-medium text-[#A5A09A] hover:text-[#F5F1EB] sm:inline-block"
             >
               Área da Equipe
             </Link>
@@ -493,31 +493,31 @@ export function BarbershopPublicView({
       {!bookingOnlyMode && (
         <section
           id="inicio"
-          className="relative overflow-hidden border-b border-[#D49B6A]/15 bg-[#0E0906]"
+          className="relative overflow-hidden border-b border-[#D99A4E]/15 bg-[#090909]"
         >
           <div className="hud-radial-glow pointer-events-none absolute inset-0" />
           <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:py-20 lg:px-8">
             <div className="lg:col-span-6">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#D49B6A]">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#D99A4E]">
                 BARBEARIA MASCULINA &bull; SALÃO FEMININO &bull; VISAGISMO
               </p>
-              <h1 className="font-serif text-5xl font-semibold leading-[1.05] text-[#F7EFE6] sm:text-6xl">
+              <h1 className="font-display text-5xl font-semibold leading-[1.05] text-[#F5F1EB] sm:text-6xl">
                 {settings?.custom_public_headline?.split(',')[0] || 'Seu estilo'},
                 <br />
-                <span className="text-[#D49B6A]">
+                <span className="text-[#D99A4E]">
                   {settings?.custom_public_headline?.split(',')[1]?.trim() || 'nossa assinatura.'}
                 </span>
               </h1>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-[#B59E8D]">
+              <p className="mt-5 max-w-md text-base leading-relaxed text-[#A5A09A]">
                 {settings?.custom_public_subheadline ||
                   'Barbearia masculina de precisão e salão feminino de alta estética em um só lugar.'}
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <HudPillArrowButton href="#agendar" label="Agendar agora" />
-                <div className="hud-panel flex items-center gap-2 rounded-full px-4 py-2.5 text-xs text-[#B59E8D]">
-                  <Star className="h-4 w-4 fill-[#D49B6A] text-[#D49B6A]" />
-                  <span className="font-semibold text-[#F7EFE6]">{averageRating}</span>
+                <div className="hud-panel flex items-center gap-2 rounded-full px-4 py-2.5 text-xs text-[#A5A09A]">
+                  <Star className="h-4 w-4 fill-[#D99A4E] text-[#D99A4E]" />
+                  <span className="font-semibold text-[#F5F1EB]">{averageRating}</span>
                   <span>({reviews.length} avaliações reais)</span>
                 </div>
               </div>
@@ -525,25 +525,25 @@ export function BarbershopPublicView({
 
             <div className="relative lg:col-span-6">
               <div className="grid grid-cols-2 gap-4">
-                <div className="relative overflow-hidden rounded-2xl border border-[#D49B6A]/25 bg-[#18100C]">
+                <div className="relative overflow-hidden rounded-2xl border border-[#D99A4E]/25 bg-[#151515]">
                   <HudCrosshair className="absolute left-2 top-2 z-10" />
                   <img
                     src="/assets/hero/hero-hud-barber-man.jpg"
                     alt="Barbearia Masculina"
                     className="aspect-[4/5] w-full object-cover"
                   />
-                  <span className="absolute bottom-3 left-3 rounded-full bg-[#0E0906]/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#D49B6A]">
+                  <span className="absolute bottom-3 left-3 rounded-full bg-[#090909]/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#D99A4E]">
                     Barbearia Masculina
                   </span>
                 </div>
-                <div className="relative mt-6 overflow-hidden rounded-2xl border border-[#D49B6A]/25 bg-[#18100C]">
+                <div className="relative mt-6 overflow-hidden rounded-2xl border border-[#D99A4E]/25 bg-[#151515]">
                   <HudCrosshair className="absolute right-2 top-2 z-10" />
                   <img
                     src="/assets/hero/hero-hud-woman-salon.jpg"
                     alt="Salão Feminino e Cabeleireira"
                     className="aspect-[4/5] w-full object-cover"
                   />
-                  <span className="absolute bottom-3 left-3 rounded-full bg-[#0E0906]/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#D49B6A]">
+                  <span className="absolute bottom-3 left-3 rounded-full bg-[#090909]/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#D99A4E]">
                     Salão &amp; Cabeleireira
                   </span>
                 </div>
@@ -560,9 +560,9 @@ export function BarbershopPublicView({
           <HudCrosshair className="absolute right-3 top-3" />
 
           {/* Header do Card + Seletor de Filial + Filtro Masculino/Feminino */}
-          <div className="flex flex-col justify-between gap-4 border-b border-[#D49B6A]/15 pb-6 lg:flex-row lg:items-center">
+          <div className="flex flex-col justify-between gap-4 border-b border-[#D99A4E]/15 pb-6 lg:flex-row lg:items-center">
             <div>
-              <h2 className="font-serif text-3xl font-medium text-[#F7EFE6] sm:text-4xl">
+              <h2 className="font-display text-3xl font-medium text-[#F5F1EB] sm:text-4xl">
                 Agende seu horário
               </h2>
               <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -580,8 +580,8 @@ export function BarbershopPublicView({
                     onClick={() => setAudienceFilter(tab.key)}
                     className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all ${
                       audienceFilter === tab.key
-                        ? 'border-[#D49B6A] bg-[#D49B6A] text-[#0E0906]'
-                        : 'border-[#D49B6A]/20 bg-[#0E0906]/60 text-[#B59E8D] hover:text-[#F7EFE6]'
+                        ? 'border-[#D99A4E] bg-[#D99A4E] text-[#090909]'
+                        : 'border-[#D99A4E]/20 bg-[#090909]/60 text-[#A5A09A] hover:text-[#F5F1EB]'
                     }`}
                   >
                     {tab.label}
@@ -597,8 +597,8 @@ export function BarbershopPublicView({
                         onClick={() => setSelectedBranchId(branch.id)}
                         className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                           branch.id === selectedBranchId
-                            ? 'border-[#D49B6A] bg-[#D49B6A]/15 text-[#D49B6A]'
-                            : 'border-white/10 bg-[#18100C] text-[#B59E8D]'
+                            ? 'border-[#D99A4E] bg-[#D99A4E]/15 text-[#D99A4E]'
+                            : 'border-[#292521] bg-[#151515] text-[#A5A09A]'
                         }`}
                       >
                         {branch.name}
@@ -610,12 +610,12 @@ export function BarbershopPublicView({
             </div>
 
             <div className="flex items-center gap-3">
-              <Clock className="h-5 w-5 text-[#D49B6A]" />
+              <Clock className="h-5 w-5 text-[#D99A4E]" />
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#D49B6A]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#D99A4E]">
                   ATENDIMENTO
                 </p>
-                <p className="text-sm font-medium text-[#F7EFE6]">
+                <p className="text-sm font-medium text-[#F5F1EB]">
                   {selectedBranch?.opening_hours_label || 'SEG - SÁB: 09h às 20h'}
                 </p>
               </div>
@@ -636,15 +636,15 @@ export function BarbershopPublicView({
                   <span
                     className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
                       active
-                        ? 'bg-[#D49B6A] text-[#0E0906]'
-                        : 'border border-white/15 bg-[#18100C] text-[#B59E8D]'
+                        ? 'bg-[#D99A4E] text-[#090909]'
+                        : 'border border-[#292521] bg-[#151515] text-[#A5A09A]'
                     }`}
                   >
                     {item.step}
                   </span>
                   <div className="leading-tight">
-                    <p className="text-sm font-semibold text-[#F7EFE6]">{item.title}</p>
-                    <p className="text-[11px] text-[#B59E8D]">{item.sub}</p>
+                    <p className="text-sm font-semibold text-[#F5F1EB]">{item.title}</p>
+                    <p className="text-[11px] text-[#A5A09A]">{item.sub}</p>
                   </div>
                 </div>
               );
@@ -654,10 +654,10 @@ export function BarbershopPublicView({
           {/* 4 Colunas Interativas */}
           <div className="grid gap-5 lg:grid-cols-12">
             {/* COLUNA 1 — SERVIÇOS */}
-            <div className="flex flex-col justify-between rounded-2xl border border-[#D49B6A]/15 bg-[#0E0906]/75 p-4 lg:col-span-3">
+            <div className="flex flex-col justify-between rounded-2xl border border-[#D99A4E]/15 bg-[#090909]/75 p-4 lg:col-span-3">
               <div>
-                <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#F7EFE6]">
-                  <Scissors className="h-4 w-4 text-[#D49B6A]" />
+                <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#F5F1EB]">
+                  <Scissors className="h-4 w-4 text-[#D99A4E]" />
                   <span>Escolha o serviço</span>
                 </div>
 
@@ -671,23 +671,23 @@ export function BarbershopPublicView({
                         onClick={() => toggleService(svc.id)}
                         className={`flex w-full items-center justify-between rounded-xl border px-3.5 py-3 text-left transition-all ${
                           selected
-                            ? 'border-[#D49B6A] bg-[#241710]'
-                            : 'border-white/10 bg-[#18100C] hover:border-[#D49B6A]/40'
+                            ? 'border-[#D99A4E] bg-[#1B1B1B]'
+                            : 'border-[#292521] bg-[#151515] hover:border-[#D99A4E]/40'
                         }`}
                       >
                         <div>
-                          <span className="block text-[9px] font-semibold uppercase tracking-wider text-[#D49B6A]">
+                          <span className="block text-[9px] font-semibold uppercase tracking-wider text-[#D99A4E]">
                             {svc.category}
                           </span>
-                          <p className="text-sm font-medium text-[#F7EFE6]">{svc.name}</p>
-                          <p className="mt-0.5 text-xs text-[#B59E8D]">
+                          <p className="text-sm font-medium text-[#F5F1EB]">{svc.name}</p>
+                          <p className="mt-0.5 text-xs text-[#A5A09A]">
                             {formatCurrencyBRL(svc.price)} &bull; {svc.duration_minutes} min
                           </p>
                         </div>
                         <span
                           className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
                             selected
-                              ? 'border-[#D49B6A] bg-[#D49B6A] text-[#0E0906]'
+                              ? 'border-[#D99A4E] bg-[#D99A4E] text-[#090909]'
                               : 'border-white/25'
                           }`}
                         >
@@ -699,8 +699,8 @@ export function BarbershopPublicView({
                 </div>
               </div>
 
-              <div className="mt-4 flex items-start gap-2 rounded-xl border border-[#D49B6A]/10 bg-[#18100C]/80 p-3 text-[11px] text-[#B59E8D]">
-                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D49B6A]" />
+              <div className="mt-4 flex items-start gap-2 rounded-xl border border-[#D99A4E]/10 bg-[#151515]/80 p-3 text-[11px] text-[#A5A09A]">
+                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D99A4E]" />
                 <span>
                   Inclui diagnóstico personalizado e finalização. Selecione quantos serviços desejar.
                 </span>
@@ -708,10 +708,10 @@ export function BarbershopPublicView({
             </div>
 
             {/* COLUNA 2 — ESPECIALISTAS (BARBEIROS & CABELEIREIRAS) */}
-            <div className="flex flex-col justify-between rounded-2xl border border-[#D49B6A]/15 bg-[#0E0906]/75 p-4 lg:col-span-3">
+            <div className="flex flex-col justify-between rounded-2xl border border-[#D99A4E]/15 bg-[#090909]/75 p-4 lg:col-span-3">
               <div>
-                <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#F7EFE6]">
-                  <User className="h-4 w-4 text-[#D49B6A]" />
+                <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#F5F1EB]">
+                  <User className="h-4 w-4 text-[#D99A4E]" />
                   <span>Escolha o especialista</span>
                 </div>
 
@@ -721,23 +721,23 @@ export function BarbershopPublicView({
                     onClick={() => setSelectedBarberId(null)}
                     className={`flex w-full items-center justify-between rounded-xl border px-3 py-2.5 text-left transition-all ${
                       selectedBarberId === null
-                        ? 'border-[#D49B6A] bg-[#241710]'
-                        : 'border-white/10 bg-[#18100C] hover:border-[#D49B6A]/40'
+                        ? 'border-[#D99A4E] bg-[#1B1B1B]'
+                        : 'border-[#292521] bg-[#151515] hover:border-[#D99A4E]/40'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#D49B6A]/35 bg-[#241710]">
-                        <Sparkles className="h-4 w-4 text-[#D49B6A]" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#D99A4E]/35 bg-[#1B1B1B]">
+                        <Sparkles className="h-4 w-4 text-[#D99A4E]" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-[#F7EFE6]">Qualquer disponível</p>
-                        <p className="text-[11px] text-[#D49B6A]">Agenda inteligente</p>
+                        <p className="text-sm font-medium text-[#F5F1EB]">Qualquer disponível</p>
+                        <p className="text-[11px] text-[#D99A4E]">Agenda inteligente</p>
                       </div>
                     </div>
                     <span
                       className={`flex h-5 w-5 items-center justify-center rounded-full border ${
                         selectedBarberId === null
-                          ? 'border-[#D49B6A] bg-[#D49B6A] text-[#0E0906]'
+                          ? 'border-[#D99A4E] bg-[#D99A4E] text-[#090909]'
                           : 'border-white/25'
                       }`}
                     >
@@ -754,8 +754,8 @@ export function BarbershopPublicView({
                         onClick={() => setSelectedBarberId(barber.id)}
                         className={`flex w-full items-center justify-between rounded-xl border px-3 py-2.5 text-left transition-all ${
                           selected
-                            ? 'border-[#D49B6A] bg-[#241710]'
-                            : 'border-white/10 bg-[#18100C] hover:border-[#D49B6A]/40'
+                            ? 'border-[#D99A4E] bg-[#1B1B1B]'
+                            : 'border-[#292521] bg-[#151515] hover:border-[#D99A4E]/40'
                         }`}
                       >
                         <div className="flex items-center gap-3">
@@ -765,10 +765,10 @@ export function BarbershopPublicView({
                             className="h-10 w-10 rounded-lg object-cover"
                           />
                           <div>
-                            <p className="text-sm font-medium text-[#F7EFE6]">{barber.name}</p>
-                            <p className="text-[10px] text-[#B59E8D]">{barber.specialty}</p>
-                            <p className="flex items-center gap-1 text-[11px] text-[#D49B6A]">
-                              <Star className="h-3 w-3 fill-[#D49B6A] text-[#D49B6A]" />
+                            <p className="text-sm font-medium text-[#F5F1EB]">{barber.name}</p>
+                            <p className="text-[10px] text-[#A5A09A]">{barber.specialty}</p>
+                            <p className="flex items-center gap-1 text-[11px] text-[#D99A4E]">
+                              <Star className="h-3 w-3 fill-[#D99A4E] text-[#D99A4E]" />
                               <span>{barber.rating_avg.toFixed(1)}</span>
                             </p>
                           </div>
@@ -776,7 +776,7 @@ export function BarbershopPublicView({
                         <span
                           className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
                             selected
-                              ? 'border-[#D49B6A] bg-[#D49B6A] text-[#0E0906]'
+                              ? 'border-[#D99A4E] bg-[#D99A4E] text-[#090909]'
                               : 'border-white/25'
                           }`}
                         >
@@ -792,7 +792,7 @@ export function BarbershopPublicView({
                 <button
                   type="button"
                   onClick={() => setShowAllBarbers((v) => !v)}
-                  className="mt-4 flex items-center justify-between text-xs font-medium text-[#B59E8D] hover:text-[#D49B6A]"
+                  className="mt-4 flex items-center justify-between text-xs font-medium text-[#A5A09A] hover:text-[#D99A4E]"
                 >
                   <span>{showAllBarbers ? 'Mostrar menos' : 'Ver todos os especialistas'}</span>
                   <ChevronRight className="h-4 w-4" />
@@ -801,13 +801,13 @@ export function BarbershopPublicView({
             </div>
 
             {/* COLUNA 3 — DATA E HORÁRIOS */}
-            <div className="flex flex-col rounded-2xl border border-[#D49B6A]/15 bg-[#0E0906]/75 p-4 lg:col-span-3">
-              <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#F7EFE6]">
-                <Calendar className="h-4 w-4 text-[#D49B6A]" />
+            <div className="flex flex-col rounded-2xl border border-[#D99A4E]/15 bg-[#090909]/75 p-4 lg:col-span-3">
+              <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#F5F1EB]">
+                <Calendar className="h-4 w-4 text-[#D99A4E]" />
                 <span>Escolha a data</span>
               </div>
 
-              <div className="rounded-xl border border-[#D49B6A]/15 bg-[#18100C] p-3">
+              <div className="rounded-xl border border-[#D99A4E]/15 bg-[#151515] p-3">
                 <div className="mb-3 flex items-center justify-between">
                   <button
                     type="button"
@@ -815,11 +815,11 @@ export function BarbershopPublicView({
                     onClick={() =>
                       setCalendarMonth((d) => new Date(d.getFullYear(), d.getMonth() - 1, 1))
                     }
-                    className="rounded p-1 text-[#B59E8D] hover:bg-white/5 hover:text-[#F7EFE6]"
+                    className="rounded p-1 text-[#A5A09A] hover:bg-white/5 hover:text-[#F5F1EB]"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </button>
-                  <span className="text-xs font-semibold capitalize text-[#F7EFE6]">
+                  <span className="text-xs font-semibold capitalize text-[#F5F1EB]">
                     {monthLabel}
                   </span>
                   <button
@@ -828,13 +828,13 @@ export function BarbershopPublicView({
                     onClick={() =>
                       setCalendarMonth((d) => new Date(d.getFullYear(), d.getMonth() + 1, 1))
                     }
-                    className="rounded p-1 text-[#B59E8D] hover:bg-white/5 hover:text-[#F7EFE6]"
+                    className="rounded p-1 text-[#A5A09A] hover:bg-white/5 hover:text-[#F5F1EB]"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>
                 </div>
 
-                <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-semibold text-[#B59E8D]">
+                <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-semibold text-[#A5A09A]">
                   {WEEKDAYS.map((w) => (
                     <span key={w}>{w}</span>
                   ))}
@@ -853,8 +853,8 @@ export function BarbershopPublicView({
                           !cell.inMonth || cell.isPast
                             ? 'cursor-not-allowed text-white/15'
                             : isSelected
-                              ? 'bg-[#D49B6A] font-bold text-[#0E0906]'
-                              : 'text-[#F7EFE6] hover:bg-white/10'
+                              ? 'bg-[#D99A4E] font-bold text-[#090909]'
+                              : 'text-[#F5F1EB] hover:bg-white/10'
                         }`}
                       >
                         {cell.day}
@@ -865,19 +865,19 @@ export function BarbershopPublicView({
               </div>
 
               <div className="mt-4">
-                <p className="mb-2.5 text-xs font-semibold text-[#F7EFE6]">Escolha o horário</p>
+                <p className="mb-2.5 text-xs font-semibold text-[#F5F1EB]">Escolha o horário</p>
 
                 {loadingSlots ? (
-                  <p className="py-4 text-center text-xs text-[#B59E8D]">
+                  <p className="py-4 text-center text-xs text-[#A5A09A]">
                     Consultando agenda em tempo real...
                   </p>
                 ) : slots.filter((s) => s.available).length === 0 ? (
-                  <div className="rounded-xl border border-white/10 bg-[#18100C] p-3 text-center">
-                    <p className="text-xs text-[#B59E8D]">Sem horários disponíveis nesta data.</p>
+                  <div className="rounded-xl border border-[#292521] bg-[#151515] p-3 text-center">
+                    <p className="text-xs text-[#A5A09A]">Sem horários disponíveis nesta data.</p>
                     <button
                       type="button"
                       onClick={() => setWaitlistOpen(true)}
-                      className="mt-2 text-xs font-semibold text-[#D49B6A] underline"
+                      className="mt-2 text-xs font-semibold text-[#D99A4E] underline"
                     >
                       Entrar na Lista de Espera automática
                     </button>
@@ -895,10 +895,10 @@ export function BarbershopPublicView({
                           onClick={() => setSelectedSlot(slot)}
                           className={`rounded-lg border py-2 text-xs font-semibold transition-all ${
                             !slot.available
-                              ? 'cursor-not-allowed border-white/5 bg-[#18100C]/40 text-white/20 line-through'
+                              ? 'cursor-not-allowed border-[#292521]/70 bg-[#151515]/40 text-white/20 line-through'
                               : isSelected
-                                ? 'border-[#D49B6A] bg-[#D49B6A] text-[#0E0906]'
-                                : 'border-white/10 bg-[#18100C] text-[#F7EFE6] hover:border-[#D49B6A]/60'
+                                ? 'border-[#D99A4E] bg-[#D99A4E] text-[#090909]'
+                                : 'border-[#292521] bg-[#151515] text-[#F5F1EB] hover:border-[#D99A4E]/60'
                           }`}
                         >
                           {slot.time}
@@ -909,15 +909,15 @@ export function BarbershopPublicView({
                 )}
 
                 {waitlistOpen && (
-                  <div className="mt-3 rounded-xl border border-[#D49B6A]/40 bg-[#18100C] p-3 text-xs">
-                    <p className="font-semibold text-[#D49B6A]">Lista de Espera</p>
-                    <p className="mt-1 text-[#B59E8D]">
+                  <div className="mt-3 rounded-xl border border-[#D99A4E]/40 bg-[#151515] p-3 text-xs">
+                    <p className="font-semibold text-[#D99A4E]">Lista de Espera</p>
+                    <p className="mt-1 text-[#A5A09A]">
                       Preencha nome e telefone ao lado para receber aviso automático caso haja vaga.
                     </p>
                     <button
                       type="button"
                       onClick={handleJoinWaitlist}
-                      className="mt-2 w-full rounded-full bg-[#D49B6A] py-1.5 font-semibold text-[#0E0906]"
+                      className="mt-2 w-full rounded-full bg-[#D99A4E] py-1.5 font-semibold text-[#090909]"
                     >
                       Confirmar na Lista de Espera
                     </button>
@@ -925,7 +925,7 @@ export function BarbershopPublicView({
                 )}
 
                 {waitlistFeedback && (
-                  <p className="mt-2 text-xs text-[#45C486]">{waitlistFeedback}</p>
+                  <p className="mt-2 text-xs text-[#16C784]">{waitlistFeedback}</p>
                 )}
               </div>
             </div>
@@ -933,35 +933,35 @@ export function BarbershopPublicView({
             {/* COLUNA 4 — RESUMO E CONFIRMAÇÃO */}
             <form
               onSubmit={handleConfirmBooking}
-              className="flex flex-col justify-between rounded-2xl border border-[#D49B6A]/15 bg-[#0E0906]/75 p-4 lg:col-span-3"
+              className="flex flex-col justify-between rounded-2xl border border-[#D99A4E]/15 bg-[#090909]/75 p-4 lg:col-span-3"
             >
               <div>
-                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#F7EFE6]">
-                  <Sparkles className="h-4 w-4 text-[#D49B6A]" />
+                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#F5F1EB]">
+                  <Sparkles className="h-4 w-4 text-[#D99A4E]" />
                   <span>Resumo do agendamento</span>
                 </div>
 
                 {bookingSuccess ? (
-                  <div className="space-y-3 rounded-xl border border-[#45C486]/40 bg-[#45C486]/10 p-4">
-                    <div className="flex items-center gap-2 text-[#45C486]">
+                  <div className="space-y-3 rounded-xl border border-[#16C784]/40 bg-[#16C784]/10 p-4">
+                    <div className="flex items-center gap-2 text-[#16C784]">
                       <Check className="h-5 w-5" />
                       <span className="text-sm font-bold">Horário Confirmado!</span>
                     </div>
-                    <p className="text-xs text-[#F7EFE6]">
+                    <p className="text-xs text-[#F5F1EB]">
                       Atendimento com <strong>{bookingSuccess.barberName}</strong> em{' '}
                       <strong>{selectedDateDisplay}</strong> às{' '}
                       <strong>{selectedSlot?.time}</strong>.
                     </p>
-                    <p className="text-xs text-[#B59E8D]">
+                    <p className="text-xs text-[#A5A09A]">
                       Código:{' '}
-                      <code className="text-[#D49B6A]">{bookingSuccess.appointmentId}</code>
+                      <code className="text-[#D99A4E]">{bookingSuccess.appointmentId}</code>
                     </p>
                     {bookingSuccess.pixQrCode && (
-                      <div className="rounded bg-[#0E0906] p-2.5 text-xs">
-                        <p className="mb-1 flex items-center gap-1 font-semibold text-[#D49B6A]">
+                      <div className="rounded bg-[#090909] p-2.5 text-xs">
+                        <p className="mb-1 flex items-center gap-1 font-semibold text-[#D99A4E]">
                           <QrCode className="h-3.5 w-3.5" /> Pix Copia e Cola gerado:
                         </p>
-                        <p className="break-all font-mono text-[10px] text-[#B59E8D]">
+                        <p className="break-all font-mono text-[10px] text-[#A5A09A]">
                           {bookingSuccess.pixQrCode}
                         </p>
                       </div>
@@ -971,49 +971,49 @@ export function BarbershopPublicView({
                         href={bookingSuccess.checkoutUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="block rounded-full bg-[#D49B6A] py-2 text-center text-xs font-bold text-[#0E0906]"
+                        className="block rounded-full bg-[#D99A4E] py-2 text-center text-xs font-bold text-[#090909]"
                       >
                         Abrir Checkout Mercado Pago
                       </a>
                     )}
                     {bookingSuccess.paymentNotice && (
-                      <p className="text-[11px] text-[#D49B6A]">{bookingSuccess.paymentNotice}</p>
+                      <p className="text-[11px] text-[#D99A4E]">{bookingSuccess.paymentNotice}</p>
                     )}
                     <button
                       type="button"
                       onClick={() => setBookingSuccess(null)}
-                      className="w-full rounded-full border border-white/15 py-2 text-xs text-[#F7EFE6] hover:bg-white/5"
+                      className="w-full rounded-full border border-[#292521] py-2 text-xs text-[#F5F1EB] hover:bg-white/5"
                     >
                       Fazer novo agendamento
                     </button>
                   </div>
                 ) : (
                   <div className="space-y-2.5 text-xs">
-                    <div className="flex justify-between border-b border-white/5 pb-2">
-                      <span className="text-[#B59E8D]">Serviço(s)</span>
-                      <span className="text-right font-medium text-[#F7EFE6]">
+                    <div className="flex justify-between border-b border-[#292521]/70 pb-2">
+                      <span className="text-[#A5A09A]">Serviço(s)</span>
+                      <span className="text-right font-medium text-[#F5F1EB]">
                         {selectedServicesList.map((s) => s.name).join(' + ')}
                       </span>
                     </div>
-                    <div className="flex justify-between border-b border-white/5 pb-2">
-                      <span className="text-[#B59E8D]">Especialista</span>
-                      <span className="font-medium text-[#F7EFE6]">
+                    <div className="flex justify-between border-b border-[#292521]/70 pb-2">
+                      <span className="text-[#A5A09A]">Especialista</span>
+                      <span className="font-medium text-[#F5F1EB]">
                         {activeBarberObj?.name || 'Agenda Inteligente'}
                       </span>
                     </div>
-                    <div className="flex justify-between border-b border-white/5 pb-2">
-                      <span className="text-[#B59E8D]">Data</span>
-                      <span className="font-medium text-[#F7EFE6]">{selectedDateDisplay}</span>
+                    <div className="flex justify-between border-b border-[#292521]/70 pb-2">
+                      <span className="text-[#A5A09A]">Data</span>
+                      <span className="font-medium text-[#F5F1EB]">{selectedDateDisplay}</span>
                     </div>
-                    <div className="flex justify-between border-b border-white/5 pb-2">
-                      <span className="text-[#B59E8D]">Horário / Duração</span>
-                      <span className="font-medium text-[#F7EFE6]">
+                    <div className="flex justify-between border-b border-[#292521]/70 pb-2">
+                      <span className="text-[#A5A09A]">Horário / Duração</span>
+                      <span className="font-medium text-[#F5F1EB]">
                         {selectedSlot?.time || '--:--'} ({totalDuration} min)
                       </span>
                     </div>
                     <div className="flex items-center justify-between pt-1">
-                      <span className="text-sm font-semibold text-[#F7EFE6]">Total</span>
-                      <span className="text-lg font-bold text-[#D49B6A]">
+                      <span className="text-sm font-semibold text-[#F5F1EB]">Total</span>
+                      <span className="text-lg font-bold text-[#D99A4E]">
                         {formatCurrencyBRL(totalPrice)}
                       </span>
                     </div>
@@ -1025,7 +1025,7 @@ export function BarbershopPublicView({
                         placeholder="Seu nome completo"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
-                        className="w-full rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs text-[#F7EFE6] placeholder:text-[#B59E8D]/60 focus:border-[#D49B6A] focus:outline-none"
+                        className="w-full rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs text-[#F5F1EB] placeholder:text-[#A5A09A]/60 focus:border-[#D99A4E] focus:outline-none"
                       />
                       <input
                         type="tel"
@@ -1033,7 +1033,7 @@ export function BarbershopPublicView({
                         placeholder="WhatsApp (11) 99999-9999"
                         value={customerPhone}
                         onChange={(e) => setCustomerPhone(e.target.value)}
-                        className="w-full rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs text-[#F7EFE6] placeholder:text-[#B59E8D]/60 focus:border-[#D49B6A] focus:outline-none"
+                        className="w-full rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs text-[#F5F1EB] placeholder:text-[#A5A09A]/60 focus:border-[#D99A4E] focus:outline-none"
                       />
                       <div className="grid grid-cols-2 gap-2">
                         <input
@@ -1041,14 +1041,14 @@ export function BarbershopPublicView({
                           placeholder="E-mail (opcional)"
                           value={customerEmail}
                           onChange={(e) => setCustomerEmail(e.target.value)}
-                          className="w-full rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs text-[#F7EFE6] placeholder:text-[#B59E8D]/60 focus:border-[#D49B6A] focus:outline-none"
+                          className="w-full rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs text-[#F5F1EB] placeholder:text-[#A5A09A]/60 focus:border-[#D99A4E] focus:outline-none"
                         />
                         <input
                           type="text"
                           placeholder="Cupom (VOLTA15)"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          className="w-full rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs uppercase text-[#F7EFE6] placeholder:normal-case placeholder:text-[#B59E8D]/60 focus:border-[#D49B6A] focus:outline-none"
+                          className="w-full rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs uppercase text-[#F5F1EB] placeholder:normal-case placeholder:text-[#A5A09A]/60 focus:border-[#D99A4E] focus:outline-none"
                         />
                       </div>
 
@@ -1059,7 +1059,7 @@ export function BarbershopPublicView({
                           onChange={(e) =>
                             setPaymentMethod(e.target.value as 'pix' | 'credit_card' | 'cash')
                           }
-                          className="rounded-lg border border-white/10 bg-[#18100C] px-2.5 py-2 text-xs text-[#F7EFE6] focus:border-[#D49B6A] focus:outline-none"
+                          className="rounded-lg border border-[#292521] bg-[#151515] px-2.5 py-2 text-xs text-[#F5F1EB] focus:border-[#D99A4E] focus:outline-none"
                         >
                           <option value="pix">Pix</option>
                           <option value="credit_card">Cartão</option>
@@ -1071,7 +1071,7 @@ export function BarbershopPublicView({
                           onChange={(e) =>
                             setPaymentTiming(e.target.value as 'on_arrival' | 'now' | 'deposit')
                           }
-                          className="rounded-lg border border-white/10 bg-[#18100C] px-2.5 py-2 text-xs text-[#F7EFE6] focus:border-[#D49B6A] focus:outline-none"
+                          className="rounded-lg border border-[#292521] bg-[#151515] px-2.5 py-2 text-xs text-[#F5F1EB] focus:border-[#D99A4E] focus:outline-none"
                         >
                           <option value="on_arrival">Pagar no local</option>
                           <option value="deposit">Sinal antecipado</option>
@@ -1079,27 +1079,27 @@ export function BarbershopPublicView({
                         </select>
                       </div>
 
-                      <label className="flex items-start gap-2 pt-1 text-[11px] text-[#B59E8D]">
+                      <label className="flex items-start gap-2 pt-1 text-[11px] text-[#A5A09A]">
                         <input
                           type="checkbox"
                           checked={lgpdConsent}
                           onChange={(e) => setLgpdConsent(e.target.checked)}
-                          className="mt-0.5 accent-[#D49B6A]"
+                          className="mt-0.5 accent-[#D99A4E]"
                         />
                         <span>
                           Concordo com a{' '}
-                          <Link href="/privacidade" className="text-[#D49B6A] underline">
+                          <Link href="/privacidade" className="text-[#D99A4E] underline">
                             Política de Privacidade (LGPD)
                           </Link>
                           .
                         </span>
                       </label>
-                      <label className="flex items-center gap-2 text-[11px] text-[#B59E8D]">
+                      <label className="flex items-center gap-2 text-[11px] text-[#A5A09A]">
                         <input
                           type="checkbox"
                           checked={whatsappOptIn}
                           onChange={(e) => setWhatsappOptIn(e.target.checked)}
-                          className="accent-[#D49B6A]"
+                          className="accent-[#D99A4E]"
                         />
                         <span>Receber confirmação via WhatsApp</span>
                       </label>
@@ -1111,7 +1111,7 @@ export function BarbershopPublicView({
               {!bookingSuccess && (
                 <div className="mt-4">
                   {bookingError && (
-                    <div className="mb-3 flex items-start gap-2 rounded-lg border border-[#E06258]/40 bg-[#E06258]/10 p-2.5 text-[11px] text-[#E06258]">
+                    <div className="mb-3 flex items-start gap-2 rounded-lg border border-[#EF5350]/40 bg-[#EF5350]/10 p-2.5 text-[11px] text-[#EF5350]">
                       <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
                       <span>{bookingError}</span>
                     </div>
@@ -1120,13 +1120,13 @@ export function BarbershopPublicView({
                   <button
                     type="submit"
                     disabled={submitting || !selectedSlot}
-                    className="w-full rounded-full bg-[#D49B6A] py-3 text-xs font-bold uppercase tracking-[0.15em] text-[#0E0906] transition-all hover:bg-[#E5B386] disabled:opacity-50"
+                    className="w-full rounded-full bg-[#D99A4E] py-3 text-xs font-bold uppercase tracking-[0.15em] text-[#090909] transition-all hover:bg-[#F2B968] disabled:opacity-50"
                   >
                     {submitting ? 'CONFIRMANDO...' : 'CONFIRMAR AGENDAMENTO'}
                   </button>
 
-                  <p className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-[#B59E8D]">
-                    <Lock className="h-3 w-3 text-[#D49B6A]" />
+                  <p className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-[#A5A09A]">
+                    <Lock className="h-3 w-3 text-[#D99A4E]" />
                     <span>Seus dados estão protegidos pela LGPD.</span>
                   </p>
                 </div>
@@ -1139,7 +1139,7 @@ export function BarbershopPublicView({
       {/* DIFERENCIAIS + GALERIA UNISSEX + RODAPÉ */}
       {!bookingOnlyMode && (
         <>
-          <section className="border-y border-[#D49B6A]/10 py-10">
+          <section className="border-y border-[#D99A4E]/10 py-10">
             <div className="mx-auto grid max-w-7xl gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
               {[
                 {
@@ -1164,12 +1164,12 @@ export function BarbershopPublicView({
                 },
               ].map((item) => (
                 <div key={item.title} className="hud-panel flex items-start gap-4 rounded-2xl p-5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D49B6A]/30 bg-[#18100C]">
-                    <item.icon className="h-5 w-5 text-[#D49B6A]" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D99A4E]/30 bg-[#151515]">
+                    <item.icon className="h-5 w-5 text-[#D99A4E]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-[#F7EFE6]">{item.title}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-[#B59E8D]">{item.desc}</p>
+                    <h3 className="text-sm font-semibold text-[#F5F1EB]">{item.title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-[#A5A09A]">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -1179,10 +1179,10 @@ export function BarbershopPublicView({
           <section id="galeria" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D49B6A]">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D99A4E]">
                   PORTFÓLIO EDITORIAL
                 </p>
-                <h2 className="mt-1 font-serif text-3xl font-semibold text-[#F7EFE6]">
+                <h2 className="mt-1 font-display text-3xl font-semibold text-[#F5F1EB]">
                   Barbearia Masculina &amp; Salão Feminino
                 </h2>
               </div>
@@ -1203,15 +1203,15 @@ export function BarbershopPublicView({
               ].map((img) => (
                 <div
                   key={img.label}
-                  className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#D49B6A]/20 bg-[#18100C]"
+                  className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#D99A4E]/20 bg-[#151515]"
                 >
                   <img
                     src={img.src}
                     alt={img.label}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E0906] via-transparent to-transparent" />
-                  <span className="absolute bottom-3 left-3 text-xs font-medium text-[#F7EFE6]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-transparent to-transparent" />
+                  <span className="absolute bottom-3 left-3 text-xs font-medium text-[#F5F1EB]">
                     {img.label}
                   </span>
                 </div>
@@ -1222,10 +1222,10 @@ export function BarbershopPublicView({
           {/* AVALIAÇÕES */}
           <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
             <div className="hud-panel rounded-3xl p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D49B6A]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D99A4E]">
                 AVALIAÇÕES VERIFICADAS
               </p>
-              <h2 className="mt-1 font-serif text-3xl font-semibold text-[#F7EFE6]">
+              <h2 className="mt-1 font-display text-3xl font-semibold text-[#F5F1EB]">
                 Experiência dos Clientes ({averageRating} ★)
               </h2>
 
@@ -1233,22 +1233,22 @@ export function BarbershopPublicView({
                 {reviews.slice(0, 4).map((rev) => (
                   <div
                     key={rev.id}
-                    className="rounded-2xl border border-[#D49B6A]/15 bg-[#0E0906]/75 p-4"
+                    className="rounded-2xl border border-[#D99A4E]/15 bg-[#090909]/75 p-4"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-[#F7EFE6]">
+                      <span className="text-sm font-semibold text-[#F5F1EB]">
                         {rev.customerName || 'Cliente Verificado'}
                       </span>
                       <div className="flex items-center gap-0.5">
                         {Array.from({ length: rev.overall_rating }).map((_, idx) => (
                           <Star
                             key={idx}
-                            className="h-3.5 w-3.5 fill-[#D49B6A] text-[#D49B6A]"
+                            className="h-3.5 w-3.5 fill-[#D99A4E] text-[#D99A4E]"
                           />
                         ))}
                       </div>
                     </div>
-                    <p className="mt-2 text-xs leading-relaxed text-[#B59E8D]">
+                    <p className="mt-2 text-xs leading-relaxed text-[#A5A09A]">
                       &ldquo;{rev.comment}&rdquo;
                     </p>
                   </div>
@@ -1258,16 +1258,16 @@ export function BarbershopPublicView({
               {reviewFormApptId && (
                 <form
                   onSubmit={handleSendReview}
-                  className="mt-6 rounded-2xl border border-[#D49B6A]/35 bg-[#0E0906] p-4"
+                  className="mt-6 rounded-2xl border border-[#D99A4E]/35 bg-[#090909] p-4"
                 >
-                  <p className="text-sm font-semibold text-[#D49B6A]">
+                  <p className="text-sm font-semibold text-[#D99A4E]">
                     Avaliar atendimento #{reviewFormApptId}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3">
                     <select
                       value={reviewOverall}
                       onChange={(e) => setReviewOverall(Number(e.target.value))}
-                      className="rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs"
+                      className="rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs"
                     >
                       {[5, 4, 3, 2, 1].map((n) => (
                         <option key={n} value={n}>
@@ -1281,59 +1281,59 @@ export function BarbershopPublicView({
                       placeholder="Conte como foi sua experiência..."
                       value={reviewComment}
                       onChange={(e) => setReviewComment(e.target.value)}
-                      className="flex-1 rounded-lg border border-white/10 bg-[#18100C] px-3 py-2 text-xs"
+                      className="flex-1 rounded-lg border border-[#292521] bg-[#151515] px-3 py-2 text-xs"
                     />
                     <button
                       type="submit"
-                      className="rounded-full bg-[#D49B6A] px-5 py-2 text-xs font-bold text-[#0E0906]"
+                      className="rounded-full bg-[#D99A4E] px-5 py-2 text-xs font-bold text-[#090909]"
                     >
                       Enviar Avaliação
                     </button>
                   </div>
-                  {reviewStatus && <p className="mt-2 text-xs text-[#D49B6A]">{reviewStatus}</p>}
+                  {reviewStatus && <p className="mt-2 text-xs text-[#D99A4E]">{reviewStatus}</p>}
                 </form>
               )}
             </div>
           </section>
 
-          <footer id="contato" className="border-t border-[#D49B6A]/15 bg-[#0E0906] py-12">
+          <footer id="contato" className="border-t border-[#D99A4E]/15 bg-[#090909] py-12">
             <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-5 lg:px-8">
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-3">
-                  <Scissors className="h-5 w-5 text-[#D49B6A]" />
-                  <span className="font-serif text-lg font-semibold uppercase tracking-wider text-[#F7EFE6]">
+                  <Scissors className="h-5 w-5 text-[#D99A4E]" />
+                  <span className="font-display text-lg font-semibold uppercase tracking-wider text-[#F5F1EB]">
                     {tenant.name}
                   </span>
                 </div>
-                <p className="mt-3 max-w-sm text-xs leading-relaxed text-[#B59E8D]">
+                <p className="mt-3 max-w-sm text-xs leading-relaxed text-[#A5A09A]">
                   {tenant.description}
                 </p>
               </div>
               <div>
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#F7EFE6]">
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#F5F1EB]">
                   SERVIÇOS
                 </h4>
-                <ul className="mt-3 space-y-2 text-xs text-[#B59E8D]">
+                <ul className="mt-3 space-y-2 text-xs text-[#A5A09A]">
                   {services.slice(0, 5).map((s) => (
                     <li key={s.id}>{s.name}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#F7EFE6]">
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#F5F1EB]">
                   CONTATO
                 </h4>
-                <ul className="mt-3 space-y-2 text-xs text-[#B59E8D]">
+                <ul className="mt-3 space-y-2 text-xs text-[#A5A09A]">
                   <li className="flex items-center gap-2">
-                    <Phone className="h-3.5 w-3.5 text-[#D49B6A]" />
+                    <Phone className="h-3.5 w-3.5 text-[#D99A4E]" />
                     <span>{selectedBranch?.phone || tenant.phone}</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Mail className="h-3.5 w-3.5 text-[#D49B6A]" />
+                    <Mail className="h-3.5 w-3.5 text-[#D99A4E]" />
                     <span>{tenant.email}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D49B6A]" />
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D99A4E]" />
                     <span>
                       {selectedBranch?.address} — {selectedBranch?.city}/{selectedBranch?.state}
                     </span>
@@ -1341,29 +1341,29 @@ export function BarbershopPublicView({
                 </ul>
               </div>
               <div>
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#F7EFE6]">
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#F5F1EB]">
                   FUNCIONAMENTO
                 </h4>
-                <ul className="mt-3 space-y-2 text-xs text-[#B59E8D]">
+                <ul className="mt-3 space-y-2 text-xs text-[#A5A09A]">
                   <li>Segunda a Sexta: 09h às 20h</li>
                   <li>Sábado: 09h às 20h</li>
                   <li>Domingo: Fechado</li>
                 </ul>
               </div>
             </div>
-            <div className="mx-auto mt-10 flex max-w-7xl flex-col items-center justify-between gap-2 border-t border-white/5 px-4 pt-6 text-[11px] text-[#B59E8D] sm:flex-row sm:px-6 lg:px-8">
+            <div className="mx-auto mt-10 flex max-w-7xl flex-col items-center justify-between gap-2 border-t border-[#292521]/70 px-4 pt-6 text-[11px] text-[#A5A09A] sm:flex-row sm:px-6 lg:px-8">
               <span>
                 &copy; {new Date().getFullYear()} {tenant.name}. Tecnologia{' '}
-                <Link href="/" className="text-[#D49B6A] hover:underline">
+                <Link href="/" className="text-[#D99A4E] hover:underline">
                   Kortaz OS
                 </Link>
                 .
               </span>
               <div className="flex gap-4">
-                <Link href="/termos" className="hover:text-[#F7EFE6]">
+                <Link href="/termos" className="hover:text-[#F5F1EB]">
                   Termos de Uso
                 </Link>
-                <Link href="/privacidade" className="hover:text-[#F7EFE6]">
+                <Link href="/privacidade" className="hover:text-[#F5F1EB]">
                   Privacidade &amp; LGPD
                 </Link>
               </div>
