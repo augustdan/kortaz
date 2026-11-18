@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -57,6 +57,12 @@ const STATUS_MAP: Record<string, { label: string; variant: BadgeVariant }> = {
 export default function ClientPortalPage() {
   const [slug, setSlug] = useState('barbearia-exclusiva');
   const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const paramSlug = new URLSearchParams(window.location.search).get('slug');
+    if (paramSlug) setSlug(paramSlug);
+  }, []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [portal, setPortal] = useState<PortalResponse | null>(null);

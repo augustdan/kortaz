@@ -559,7 +559,40 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         )}
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-4 pb-24 sm:p-6 sm:pb-24 lg:p-8 lg:pb-8">{children}</main>
+
+        {/* Barra de Navegação Inferior Mobile */}
+        <nav className="no-print fixed bottom-0 left-0 right-0 z-30 flex items-center justify-around border-t border-[#292521] bg-[#0C0C0C]/95 px-2 py-2 backdrop-blur-xl lg:hidden">
+          {[
+            { href: '/app', label: 'Início', icon: LayoutDashboard },
+            { href: '/app/agenda', label: 'Agenda', icon: CalendarDays },
+            { href: '/app/agendamentos', label: 'Horários', icon: Calendar },
+            { href: '/app/clientes', label: 'Clientes', icon: Users },
+          ].map((item) => {
+            const active =
+              item.href === '/app' ? pathname === '/app' : pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex flex-col items-center gap-1 rounded-xl px-3 py-1.5 text-[10px] font-semibold ${
+                  active ? 'text-[#D99A4E]' : 'text-[#A5A09A]'
+                }`}
+              >
+                <item.icon className="h-4 w-4" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+          <button
+            type="button"
+            onClick={() => setMobileDrawerOpen(true)}
+            className="flex flex-col items-center gap-1 rounded-xl px-3 py-1.5 text-[10px] font-semibold text-[#A5A09A]"
+          >
+            <Menu className="h-4 w-4" />
+            <span>Menu</span>
+          </button>
+        </nav>
       </div>
     </div>
   );

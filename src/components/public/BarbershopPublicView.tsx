@@ -477,7 +477,13 @@ export function BarbershopPublicView({
             </nav>
           )}
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <Link
+              href={`/cliente?slug=${tenant.slug}`}
+              className="rounded-xl border border-[#292521] bg-[#151515] px-3 py-2 text-xs font-semibold text-[#F5F1EB] transition-colors hover:border-[#D99A4E]/60"
+            >
+              Meus Horários
+            </Link>
             <Link
               href="/login"
               className="hidden text-xs font-medium text-[#A5A09A] hover:text-[#F5F1EB] sm:inline-block"
