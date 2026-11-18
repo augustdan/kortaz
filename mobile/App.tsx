@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar, LayoutDashboard } from 'lucide-react-native';
+import { Calendar, Clock, LayoutDashboard } from 'lucide-react-native';
 import { ClientBookingScreen } from './src/screens/ClientBookingScreen';
+import { ClientPortalScreen } from './src/screens/ClientPortalScreen';
 import { BarberConsoleScreen } from './src/screens/BarberConsoleScreen';
 import { COLORS } from './src/theme';
 
 export default function App() {
-  const [tab, setTab] = useState<'client' | 'barber'>('client');
+  const [tab, setTab] = useState<'book' | 'portal' | 'barber'>('book');
 
   return (
     <SafeAreaProvider>
@@ -26,24 +27,42 @@ export default function App() {
             </Text>
           </View>
           <Text style={styles.modeTag}>
-            {tab === 'client' ? 'Modo Cliente' : 'Modo Barbeiro'}
+            {tab === 'book'
+              ? 'Agendar'
+              : tab === 'portal'
+                ? 'Área do Cliente'
+                : 'Painel Barbeiro'}
           </Text>
         </View>
 
         {/* Active Screen */}
         <View style={styles.body}>
-          {tab === 'client' ? <ClientBookingScreen /> : <BarberConsoleScreen />}
+          {tab === 'book' ? (
+            <ClientBookingScreen />
+          ) : tab === 'portal' ? (
+            <ClientPortalScreen />
+          ) : (
+            <BarberConsoleScreen />
+          )}
         </View>
 
         {/* Bottom Tabs */}
         <View style={styles.tabBar}>
           <TouchableOpacity
-            style={[styles.tabItem, tab === 'client' && styles.tabItemActive]}
-            onPress={() => setTab('client')}
+            style={[styles.tabItem, tab === 'book' && styles.tabItemActive]}
+            onPress={() => setTab('book')}
           >
-            <Calendar color={tab === 'client' ? COLORS.bronze : COLORS.muted} size={18} />
-            <Text style={[styles.tabText, tab === 'client' && styles.tabTextActive]}>
-              Agendar
+            <Calendar color={tab === 'book' ? COLORS.bronze : COLORS.muted} size={17} />
+            <Text style={[styles.tabText, tab === 'book' && styles.tabTextActive]}>Agendar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.tabItem, tab === 'portal' && styles.tabItemActive]}
+            onPress={() => setTab('portal')}
+          >
+            <Clock color={tab === 'portal' ? COLORS.bronze : COLORS.muted} size={17} />
+            <Text style={[styles.tabText, tab === 'portal' && styles.tabTextActive]}>
+              Meus Horários
             </Text>
           </TouchableOpacity>
 
@@ -51,10 +70,8 @@ export default function App() {
             style={[styles.tabItem, tab === 'barber' && styles.tabItemActive]}
             onPress={() => setTab('barber')}
           >
-            <LayoutDashboard color={tab === 'barber' ? COLORS.bronze : COLORS.muted} size={18} />
-            <Text style={[styles.tabText, tab === 'barber' && styles.tabTextActive]}>
-              Painel
-            </Text>
+            <LayoutDashboard color={tab === 'barber' ? COLORS.bronze : COLORS.muted} size={17} />
+            <Text style={[styles.tabText, tab === 'barber' && styles.tabTextActive]}>Painel</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -94,20 +111,20 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     backgroundColor: COLORS.sidebar,
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     paddingVertical: 8,
-    gap: 8,
+    gap: 6,
   },
   tabItem: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: 6,
     paddingVertical: 10,
     borderRadius: 12,
   },
   tabItemActive: { backgroundColor: COLORS.cardElevated },
-  tabText: { fontSize: 12, fontWeight: '600', color: COLORS.muted },
+  tabText: { fontSize: 11, fontWeight: '600', color: COLORS.muted },
   tabTextActive: { color: COLORS.bronze, fontWeight: '700' },
 });

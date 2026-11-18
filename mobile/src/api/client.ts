@@ -185,3 +185,44 @@ export function updateAppointmentStatus(
     body: JSON.stringify({ status }),
   });
 }
+
+export interface CustomerPortalPayload {
+  tenant: { id: string; name: string; slug: string };
+  customer: {
+    id: string;
+    full_name: string;
+    phone: string;
+    visits_count: number;
+    total_spent: number;
+  };
+  loyalty: {
+    points_balance: number;
+    lifetime_points: number;
+  };
+  appointments: {
+    id: string;
+    starts_at: string;
+    ends_at: string;
+    status: string;
+    total_amount: number;
+    barberName: string;
+    branchName: string;
+    services: string[];
+  }[];
+}
+
+export function fetchCustomerPortal(slug: string, phone: string): Promise<CustomerPortalPayload> {
+  const qs = new URLSearchParams({ slug, phone });
+  return apiFetch<CustomerPortalPayload>(`/api/public/customer-portal?${qs.toString()}`);
+}
+
+export function cancelCustomerAppointment(
+  slug: string,
+  phone: string,
+  appointmentId: string
+): Promise<{ ok: boolean }> {
+  return apiFetch<{ ok: boolean }>('/api/public/customer-portal', {
+    method: 'POST',
+    body: JSON.stringify({ action: 'cancel', slug, phone, appointmentId }),
+  });
+}
