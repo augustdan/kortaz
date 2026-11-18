@@ -33,6 +33,17 @@ import {
 } from '@/lib/domain/plan-limits';
 import { dispatchWhatsAppMessage, renderNotificationTemplate } from '@/lib/integrations/whatsapp';
 import { dispatchTransactionalEmail } from '@/lib/integrations/resend';
+import { createServiceRoleSupabaseClient } from '@/lib/integrations/supabase';
+
+const SUPABASE_SNAPSHOT_ID = 'primary';
+
+function shouldUseSupabaseStore(): boolean {
+  return Boolean(
+    !process.env.BARBEROS_DATA_FILE &&
+      process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+}
 
 function getDataFilePath(): string {
   if (process.env.BARBEROS_DATA_FILE) return process.env.BARBEROS_DATA_FILE;
@@ -40,10 +51,35 @@ function getDataFilePath(): string {
   return path.join(baseDir, 'barberos-store.json');
 }
 
-// Mutex em memória para evitar condições de corrida em gravações simultâneas no arquivo e agendamentos concorrentes
+// Mutex em memória para evitar condições de corrida em gravações simultâneas e agendamentos concorrentes
 let writeQueue: Promise<unknown> = Promise.resolve();
 
 export async function readDb(): Promise<DatabaseState> {
+  if (shouldUseSupabaseStore()) {
+    const sb = createServiceRoleSupabaseClient();
+    if (sb) {
+      const { data, error } = await sb
+        .from('app_state_snapshots')
+        .select('state')
+        .eq('id', SUPABASE_SNAPSHOT_ID)
+        .maybeSingle();
+
+      if (!error && data?.state) {
+        return data.state as DatabaseState;
+      }
+
+      if (!error && !data) {
+        const initial = createInitialSeedState();
+        await sb.from('app_state_snapshots').upsert({
+          id: SUPABASE_SNAPSHOT_ID,
+          state: initial,
+          updated_at: new Date().toISOString(),
+        });
+        return initial;
+      }
+    }
+  }
+
   const filePath = getDataFilePath();
   try {
     const raw = await fs.readFile(/*turbopackIgnore: true*/ filePath, 'utf8');
@@ -60,6 +96,19 @@ export async function mutateDb<T>(mutator: (db: DatabaseState) => Promise<T> | T
   const run = writeQueue.then(async () => {
     const db = await readDb();
     const result = await mutator(db);
+
+    if (shouldUseSupabaseStore()) {
+      const sb = createServiceRoleSupabaseClient();
+      if (sb) {
+        const { error } = await sb.from('app_state_snapshots').upsert({
+          id: SUPABASE_SNAPSHOT_ID,
+          state: db,
+          updated_at: new Date().toISOString(),
+        });
+        if (!error) return result;
+      }
+    }
+
     const filePath = getDataFilePath();
     await fs.mkdir(/*turbopackIgnore: true*/ path.dirname(filePath), { recursive: true });
     await fs.writeFile(/*turbopackIgnore: true*/ filePath, JSON.stringify(db, null, 2), 'utf8');
