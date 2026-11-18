@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0E0906;
+  --color-surface: #18100C;
+  --color-surface-elevated: #241710;
+  --color-gold: #D49B6A;
+  --color-gold-hover: #E5B386;
+  --color-copper: #A86B3E;
+  --color-foreground: #F7EFE6;
+  --color-muted: #B59E8D;
+  --color-success: #45C486;
+  --color-danger: #E06258;
+
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0E0906;
+  --surface: #18100C;
+  --surface-2: #241710;
+  --gold: #D49B6A;
+  --gold-hover: #E5B386;
+  --text-main: #F7EFE6;
+  --text-muted: #B59E8D;
+  --success: #45C486;
+  --error: #E06258;
+}
+
+body {
+  background-color: #0E0906;
+  color: #F7EFE6;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Efeitos HUD Espresso & Bronze */
+.hud-panel {
+  background: linear-gradient(155deg, rgba(36, 23, 16, 0.72) 0%, rgba(16, 10, 7, 0.88) 100%);
+  border: 1px solid rgba(212, 155, 106, 0.18);
+  box-shadow: inset 0 1px 0 rgba(247, 239, 230, 0.08), 0 24px 60px -24px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(18px);
+}
+
+.hud-pill {
+  background: linear-gradient(135deg, rgba(46, 30, 21, 0.78) 0%, rgba(22, 14, 9, 0.85) 100%);
+  border: 1px solid rgba(212, 155, 106, 0.28);
+  box-shadow: inset 0 1px 0 rgba(247, 239, 230, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.hud-radial-glow {
+  background: radial-gradient(circle at 50% 35%, rgba(168, 107, 62, 0.24) 0%, rgba(62, 35, 19, 0.14) 38%, rgba(14, 9, 6, 0) 72%);
+}
+
+/* Scrollbars discretas no tema espresso */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0E0906;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A2519;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D49B6A;
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
