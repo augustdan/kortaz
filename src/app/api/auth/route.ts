@@ -14,7 +14,7 @@ import {
   registerTenantAccount,
   resolveSessionContext,
 } from '@/lib/server/store';
-import { hashPassword, SESSION_COOKIE_NAME } from '@/lib/server/auth-crypto';
+import { hashPassword, SESSION_COOKIE_NAME, signSessionToken } from '@/lib/server/auth-crypto';
 import { attachSessionCookie, getRequestSession } from '@/lib/server/request-auth';
 import { dispatchTransactionalEmail } from '@/lib/integrations/resend';
 
@@ -168,7 +168,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: auth.error }, { status: 401 });
     }
 
-    const res = NextResponse.json({ ok: true, session: auth.context });
+    const token = signSessionToken({
+      profileId: auth.context.profile.id,
+      tenantId: auth.context.tenant?.id ?? null,
+      exp: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    });
+    const res = NextResponse.json({ ok: true, token, session: auth.context });
     return attachSessionCookie(
       res,
       auth.context.profile.id,

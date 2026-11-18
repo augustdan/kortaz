@@ -14,13 +14,20 @@ export async function getRequestSession(request?: Request): Promise<SessionConte
   let token: string | undefined;
 
   if (request) {
-    const cookieHeader = request.headers.get('cookie') || '';
-    const match = cookieHeader
-      .split(';')
-      .map((c) => c.trim())
-      .find((c) => c.startsWith(`${SESSION_COOKIE_NAME}=`));
-    if (match) {
-      token = decodeURIComponent(match.slice(SESSION_COOKIE_NAME.length + 1));
+    const authHeader = request.headers.get('authorization') || '';
+    if (authHeader.toLowerCase().startsWith('bearer ')) {
+      token = authHeader.slice(7).trim();
+    }
+
+    if (!token) {
+      const cookieHeader = request.headers.get('cookie') || '';
+      const match = cookieHeader
+        .split(';')
+        .map((c) => c.trim())
+        .find((c) => c.startsWith(`${SESSION_COOKIE_NAME}=`));
+      if (match) {
+        token = decodeURIComponent(match.slice(SESSION_COOKIE_NAME.length + 1));
+      }
     }
   }
 
